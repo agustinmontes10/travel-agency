@@ -13,7 +13,7 @@ export default async function LandingPage({ searchParams }: LandingPageProps) {
   const startDateFrom = searchParams?.startDateFrom;
 
   return (
-    <main id="home" className="flex flex-1 flex-col gap-16 py-10 md:gap-20 md:py-14 lg:gap-24 lg:py-20">
+    <main id="home" className="flex flex-1 flex-col gap-16 md:gap-20 lg:gap-24">
       <Hero />
       <PublicPackagesSection startDateFrom={startDateFrom} />
       <ServicesSection />

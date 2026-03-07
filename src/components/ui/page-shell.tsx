@@ -11,7 +11,7 @@ export function PageShell({ children, className }: PageShellProps) {
     <div className="min-h-screen">
       <div
         className={cn(
-          "mx-auto flex min-h-screen w-full max-w-5xl flex-col px-4 pb-10 pt-6 sm:px-6 lg:px-8",
+          "mx-auto flex min-h-screen w-full max-w-5xl flex-col px-4 sm:px-6 lg:px-8",
           className
         )}
       >
