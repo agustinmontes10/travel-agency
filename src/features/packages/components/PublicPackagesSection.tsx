@@ -1,6 +1,7 @@
 import { listPackages, type ListPackagesParams } from "@/features/packages/service";
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input } from "@/components/ui";
+import { Card, CardHeader, CardTitle, CardDescription, Input, Button } from "@/components/ui";
 import Image from "next/image";
+import { PackagesMobileSwiper } from "./PackagesMobileSwiper";
 
 interface PublicPackagesSectionProps {
   startDateFrom?: string;
@@ -81,41 +82,37 @@ export async function PublicPackagesSection({ startDateFrom }: PublicPackagesSec
           </CardHeader>
         </Card>
       ) : (
-        <div className="grid gap-6 pt-2 md:grid-cols-2 lg:grid-cols-3">
-          {packages.map((pkg) => (
-            <article
-              key={pkg.id}
-              className="group overflow-hidden rounded-3xl border border-border-subtle bg-surface shadow-soft"
-            >
-              <div className="relative h-52 overflow-hidden">
-                <Image
-                  src={pkg.image}
-                  alt={pkg.title}
-                  fill
-                  sizes="(min-width: 1024px) 320px, (min-width: 768px) 45vw, 100vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-slate-100">
+        <>
+          <div className="hidden gap-6 pt-2 md:grid md:grid-cols-2 lg:grid-cols-3">
+            {packages.map((pkg) => (
+              <article
+                key={pkg.id}
+                className="group overflow-hidden rounded-3xl border border-border-subtle bg-surface shadow-soft"
+              >
+                <div className="relative h-112 overflow-hidden">
+                  <Image
+                    src={pkg.image}
+                    alt={pkg.title}
+                    fill
+                    sizes="(min-width: 1024px) 320px, (min-width: 768px) 45vw, 100vw"
+                    className="object-fill transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+
+                <div className="flex items-center justify-between p-4 text-xs">
                   <div className="space-y-0.5">
-                    <p className="font-semibold leading-snug">{pkg.title}</p>
-                    <p className="text-[0.7rem] uppercase tracking-[0.22em] text-slate-200/80">
+                    <p className="text-lg font-semibold leading-snug">{pkg.title}</p>
+                    <p className="text-sm uppercase text-muted-foreground">
                       Salida {formatDate(pkg.startDate)}
                     </p>
                   </div>
                 </div>
-              </div>
+              </article>
+            ))}
+          </div>
 
-              <CardContent className="gap-2 p-4">
-                <CardDescription className="text-xs leading-relaxed">
-                  Ideal para mostrar un resumen corto del destino, la duración o el
-                  tipo de experiencia. Podés extender este modelo cuando agregues más
-                  campos al paquete.
-                </CardDescription>
-              </CardContent>
-            </article>
-          ))}
-        </div>
+          <PackagesMobileSwiper packages={packages} />
+        </>
       )}
     </section>
   );
