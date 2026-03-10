@@ -3,6 +3,7 @@ import { PublicPackagesSection } from "@/features/packages/components/PublicPack
 import { ServicesSection } from "@/features/landing/components/ServicesSection";
 import { ContactSection } from "@/features/landing/components/ContactSection";
 import { CtaVideosSection } from "@/features/landing/components/CtaSection";
+import Image from "next/image";
 
 interface LandingPageProps {
   searchParams?: {

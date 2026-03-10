@@ -1,0 +1,5 @@
+/* Blur para slides inactivos en ambos componentes de Packages */
+.packages-swiper-desktop .swiper-slide:not(.swiper-slide-active),
+.packages-swiper-mobile .swiper-slide:not(.swiper-slide-active) {
+  filter: blur(2px);
+}

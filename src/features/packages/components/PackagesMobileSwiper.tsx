@@ -7,6 +7,7 @@ import type { PublicPackage } from "@/features/packages/service";
 
 import "swiper/css";
 import "swiper/css/effect-cards";
+import "./PackagesSwiper.css";
 
 interface PackagesMobileSwiperProps {
   packages: PublicPackage[];
@@ -22,7 +23,11 @@ export function PackagesMobileSwiper({ packages }: PackagesMobileSwiperProps) {
         grabCursor
         modules={[EffectCards, Pagination]}
         pagination={{ clickable: true }}
-        className="max-w-xs"
+        cardsEffect={{
+          perSlideOffset: 16,
+          perSlideRotate: 2,
+        }}
+        className="max-w-xs packages-swiper-mobile"
       >
         {packages.map((pkg) => (
           <SwiperSlide key={pkg.id}>

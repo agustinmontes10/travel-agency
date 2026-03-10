@@ -2,6 +2,7 @@ import { listPackages, type ListPackagesParams } from "@/features/packages/servi
 import { Card, CardHeader, CardTitle, CardDescription, Input, Button } from "@/components/ui";
 import Image from "next/image";
 import { PackagesMobileSwiper } from "./PackagesMobileSwiper";
+import { PackagesSwiper } from "./PackagesSwiper";
 
 interface PublicPackagesSectionProps {
   startDateFrom?: string;
@@ -83,34 +84,7 @@ export async function PublicPackagesSection({ startDateFrom }: PublicPackagesSec
         </Card>
       ) : (
         <>
-          <div className="hidden gap-6 pt-2 md:grid md:grid-cols-2 lg:grid-cols-3">
-            {packages.map((pkg) => (
-              <article
-                key={pkg.id}
-                className="group overflow-hidden rounded-3xl border border-border-subtle bg-surface shadow-soft"
-              >
-                <div className="relative h-112 overflow-hidden">
-                  <Image
-                    src={pkg.image}
-                    alt={pkg.title}
-                    fill
-                    sizes="(min-width: 1024px) 320px, (min-width: 768px) 45vw, 100vw"
-                    className="object-fill transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-
-                <div className="flex items-center justify-between p-4 text-xs">
-                  <div className="space-y-0.5">
-                    <p className="text-lg font-semibold leading-snug">{pkg.title}</p>
-                    <p className="text-sm uppercase text-muted-foreground">
-                      Salida {formatDate(pkg.startDate)}
-                    </p>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
+          <PackagesSwiper packages={packages} />
           <PackagesMobileSwiper packages={packages} />
         </>
       )}

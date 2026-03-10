@@ -79,7 +79,7 @@ export function CtaVideosSection() {
             return (
               <SwiperSlide key={image.src}>
                 <div
-                  className={`relative my-12 h-64 sm:h-72 md:h-80 w-full overflow-hidden rounded-3xl bg-slate-900/60 shadow-lg shadow-slate-950/60 transition-transform duration-500 ${offsetClass}`}
+                  className={`relative my-12 h-64 sm:h-72 md:h-80 w-full overflow-hidden rounded-3xl bg-slate-900/60 shadow-lg shadow-slate-950/60 transition-transform duration-500 ${offsetClass} cursor-pointer`}
                   onMouseEnter={() => setHoverLabel(image.label)}
                   onMouseLeave={() => setHoverLabel(null)}
                   onClick={() => setSelectedImage(image)}
