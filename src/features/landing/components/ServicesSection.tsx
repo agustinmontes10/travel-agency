@@ -1,39 +1,43 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui";
 
-const PersonalizedIcon = () => (
-  <svg className="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+const CompassIcon = () => (
+  <svg className="w-10 h-10 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" opacity="0.9" stroke="none" />
   </svg>
 );
 
-const HumanIcon = () => (
-  <svg className="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+const ChatIcon = () => (
+  <svg className="w-10 h-10 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    <line x1="9" y1="10" x2="15" y2="10" />
+    <line x1="9" y1="14" x2="13" y2="14" />
   </svg>
 );
 
-const SupportIcon = () => (
-  <svg className="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12h-8v-2h8v2zm0-3h-8V9h8v2zm0-3h-8V6h8v2z" />
+const ShieldIcon = () => (
+  <svg className="w-10 h-10 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    <polyline points="9 12 11 14 15 10" />
   </svg>
 );
 
 const services = [
   {
     title: "Atención personalizada",
-    icon: <PersonalizedIcon />,
+    icon: <CompassIcon />,
     description:
       "Te asesoramos en cada etapa del viaje para encontrar la mejor opción según tus gustos, presupuesto y fechas.",
   },
   {
     title: "Asesoramiento humano",
-    icon: <HumanIcon />,
+    icon: <ChatIcon />,
     description:
       "Te ayudamos a elegir destinos, rutas y experiencias aprovechando nuestro conocimiento del mercado y las mejores opciones disponibles.",
   },
   {
     title: "Acompañamiento durante tu viaje",
-    icon: <SupportIcon />,
+    icon: <ShieldIcon />,
     description:
       "Estamos disponibles antes, durante y después de tu viaje para resolver dudas, cambios o cualquier imprevisto.",
   },
@@ -44,28 +48,28 @@ export function ServicesSection() {
     <section id="services" className="space-y-8">
       <div className="space-y-3 text-center">
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
-          Servicios para tu agencia
+          Por qué elegirnos
         </p>
         <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-          Todo lo que necesitás para mostrar y vender tus viajes.
+          Viajás tranquilo porque estás bien acompañado.
         </h2>
         <p className="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Una landing enfocada en tus paquetes públicos hoy, y un panel de
-          administración listo para sumar gestión interna mañana.
+          Nos especializamos en armar paquetes a medida para que cada viaje
+          sea una experiencia única, sin sorpresas ni imprevistos.
         </p>
       </div>
 
       <div className="grid gap-5 md:grid-cols-3">
         {services.map((service) => (
-          <Card key={service.title} className="h-full bg-surface/90 shadow-md border-0">
-            <CardHeader className="gap-3">
-              <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-accent-soft">
+          <Card key={service.title} className="h-full bg-surface/90 shadow-soft border-0">
+            <CardHeader className="gap-4">
+              <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-accent-soft">
                 {service.icon}
               </div>
               <CardTitle className="text-base sm:text-lg">{service.title}</CardTitle>
             </CardHeader>
             <CardContent>
-              <CardDescription>{service.description}</CardDescription>
+              <CardDescription className="text-sm leading-relaxed">{service.description}</CardDescription>
             </CardContent>
           </Card>
         ))}
@@ -73,4 +77,3 @@ export function ServicesSection() {
     </section>
   );
 }
-
