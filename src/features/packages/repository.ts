@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import type { CreatePackageInput } from "./schemas";
+import type { CreatePackageInput, UpdatePackageInput } from "./schemas";
 
 export async function create(data: CreatePackageInput) {
   return db.package.create({ data });
@@ -24,4 +24,16 @@ export async function findAll(params: FindAllParams = {}) {
       startDate: "asc",
     },
   });
+}
+
+export async function findById(id: string) {
+  return db.package.findUnique({ where: { id } });
+}
+
+export async function update(id: string, data: UpdatePackageInput) {
+  return db.package.update({ where: { id }, data });
+}
+
+export async function remove(id: string) {
+  return db.package.delete({ where: { id } });
 }

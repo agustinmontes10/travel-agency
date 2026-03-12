@@ -1,5 +1,5 @@
 import * as repo from "./repository";
-import type { CreatePackageInput } from "./schemas";
+import type { CreatePackageInput, UpdatePackageInput } from "./schemas";
 
 export interface ListPackagesParams {
   startDateFrom?: Date;
@@ -13,70 +13,25 @@ export interface PublicPackage {
   createdAt: Date;
 }
 
-const MOCK_PACKAGES: PublicPackage[] = [
-  {
-    id: "mock-1",
-    title: "París y ciudades europeas",
-    image: "/travelExample.jpeg",
-    startDate: new Date("2026-06-15"),
-    createdAt: new Date("2026-03-01"),
-  },
-  {
-    id: "mock-2",
-    title: "New York urbano y compras",
-    image: "/travelExample.jpeg",
-    startDate: new Date("2026-07-10"),
-    createdAt: new Date("2026-03-01"),
-  },
-  {
-    id: "mock-3",
-    title: "Playas del Caribe all inclusive",
-    image: "/travelExample.jpeg",
-    startDate: new Date("2026-08-05"),
-    createdAt: new Date("2026-03-01"),
-  },
-  {
-    id: "mock-4",
-    title: "París y ciudades europeas",
-    image: "/travelExample.jpeg",
-    startDate: new Date("2026-06-15"),
-    createdAt: new Date("2026-03-01"),
-  },
-  {
-    id: "mock-5",
-    title: "New York urbano y compras",
-    image: "/travelExample.jpeg",
-    startDate: new Date("2026-07-10"),
-    createdAt: new Date("2026-03-01"),
-  },
-  {
-    id: "mock-6",
-    title: "Playas del Caribe all inclusive",
-    image: "/travelExample.jpeg",
-    startDate: new Date("2026-08-05"),
-    createdAt: new Date("2026-03-01"),
-  },
-];
-
 export async function createPackage(data: CreatePackageInput) {
   return repo.create(data);
+}
+
+export async function getPackageById(id: string) {
+  return repo.findById(id);
+}
+
+export async function updatePackage(id: string, data: UpdatePackageInput) {
+  return repo.update(id, data);
+}
+
+export async function deletePackage(id: string) {
+  return repo.remove(id);
 }
 
 export async function listPackages(
   params?: ListPackagesParams,
 ): Promise<PublicPackage[]> {
-
-  //const result = await repo.findAll(params);
-  const { startDateFrom } = params || {};
-
-  let result = [...MOCK_PACKAGES];
-
-  if (startDateFrom) {
-    result = result.filter((pkg) => pkg.startDate >= startDateFrom);
-  }
-
-  result.sort((a, b) => a.startDate.getTime() - b.startDate.getTime());
-
-  //return result as PublicPackage[];
-  return result;
+  const result = await repo.findAll(params);
+  return result as PublicPackage[];
 }
