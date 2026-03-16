@@ -16,13 +16,19 @@ const NAV_LINKS = [
   { href: "#contact", label: "Contacto" },
 ];
 
+function scrollToSection(href: string) {
+  const id = href.replace("#", "");
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+}
+
 export function Navbar({ whatsappUrl }: NavbarProps) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <header className="mx-auto flex max-w-6xl w-full items-center justify-between pt-6 text-sm absolute z-10 top-0 px-4 sm:px-6">
-        <Link href="#home" className="inline-flex items-center">
+        <button onClick={() => scrollToSection("#home")} className="inline-flex items-center">
           <Image
             src="/LogoBlanco.png"
             alt="mt turismo Gonzales Chaves"
@@ -31,20 +37,24 @@ export function Navbar({ whatsappUrl }: NavbarProps) {
             priority
             className="h-10 w-auto sm:h-12"
           />
-        </Link>
+        </button>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-8 text-xs font-medium uppercase tracking-[0.22em] text-slate-100 sm:flex">
+        <nav className="hidden items-center gap-8 text-md font-medium uppercase tracking-[0.22em] text-slate-100 sm:flex">
           {NAV_LINKS.map(({ href, label }) => (
-            <Link key={href} href={href} className="hover:text-white">
+            <button
+              key={href}
+              onClick={() => scrollToSection(href)}
+              className="relative text-slate-300 transition-all duration-250 hover:text-amber-100 hover:-translate-y-px hover:[text-shadow:0_0_20px_rgba(253,186,116,0.45)] after:absolute after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:h-[1.5px] after:w-0 after:bg-gradient-to-r after:from-transparent after:via-amber-400 after:to-transparent after:transition-[width] after:duration-350 after:ease-out hover:after:w-[130%]"
+            >
               {label}
-            </Link>
+            </button>
           ))}
-          <Link href={whatsappUrl} aria-label="Agendar por WhatsApp">
+          <Link href={whatsappUrl} target={'_blank'} aria-label="Agendar por WhatsApp">
             <Button
               size="md"
               variant="secondary"
-              className="rounded-full px-5 text-xs font-semibold uppercase tracking-[0.22em]"
+              className="rounded-full px-5 text-xs font-semibold uppercase tracking-[0.22em] cursor-pointer"
             >
               Consultar ahora
             </Button>
@@ -81,16 +91,15 @@ export function Navbar({ whatsappUrl }: NavbarProps) {
         </button>
 
         {NAV_LINKS.map(({ href, label }) => (
-          <Link
+          <button
             key={href}
-            href={href}
-            onClick={() => setOpen(false)}
-            className="text-2xl font-semibold uppercase tracking-[0.18em] text-slate-800 border-b border-slate-100 pb-4"
+            onClick={() => { scrollToSection(href); setOpen(false); }}
+            className="text-xl font-semibold uppercase tracking-[0.18em] text-slate-700 border-b border-slate-100 pb-4 transition-all duration-200 hover:text-amber-600 hover:pl-2 hover:border-amber-300"
           >
             {label}
-          </Link>
+          </button>
         ))}
-        <Link href={whatsappUrl} onClick={() => setOpen(false)} className="mt-4">
+        <Link href={whatsappUrl} target={'_blank'} onClick={() => setOpen(false)} className="mt-4">
           <Button
             size="lg"
             className="w-full rounded-full font-semibold uppercase tracking-[0.18em]"

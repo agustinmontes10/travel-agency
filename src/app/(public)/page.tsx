@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import { Hero } from "@/features/landing/components/Hero";
 import { PublicPackagesSection } from "@/features/packages/components/PublicPackagesSection";
 import { ServicesSection } from "@/features/landing/components/ServicesSection";

@@ -52,7 +52,7 @@ export function PackagesSwiper({ packages }: PackagesSwiperProps) {
                     src={pkg.image}
                     alt={pkg.title}
                     fill
-                    sizes="100vw"
+                    sizes="(max-width: 1024px) 384px, 420px"
                     className="object-fill"
                   />
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black/70 via-black/20 to-transparent" />

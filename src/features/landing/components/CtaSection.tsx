@@ -6,19 +6,20 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { Button } from "@/components/ui";
+import { motion } from "motion/react";
 
 import "swiper/css";
 import { buildWhatsAppUrl } from "./ContactSection";
 
 const CTA_IMAGES = [
-  { src: "/imagesCTA/Caribe.jpg", label: "Playa caribeña" },
-  { src: "/imagesCTA/MachuPichu.jpg", label: "Machu Picchu - Peru" },
-  { src: "/imagesCTA/ParqueIguazu.jpg", label: "Parque Iguazú - Argentina" },
-  { src: "/imagesCTA/BigBen.jpg", label: "Big Ben - Inglaterra" },
-  { src: "/imagesCTA/EstatuaLibertad.jpg", label: "Estatua de la Libertad - EEUU" },
-  { src: "/imagesCTA/ParqueBanff.jpg", label: "Parque Nacional Banff - Canada" },
-  { src: "/imagesCTA/BoraBora.jpg", label: "Bora Bora" },
-  { src: "/imagesCTA/Glaciar.jpg", label: "Glaciar Perito Moreno - Argentina" },
+  { src: "/imagesCTA/Caribe.webp", label: "Playa caribeña" },
+  { src: "/imagesCTA/MachuPichu.webp", label: "Machu Picchu - Peru" },
+  { src: "/imagesCTA/ParqueIguazu.webp", label: "Parque Iguazú - Argentina" },
+  { src: "/imagesCTA/BigBen.webp", label: "Big Ben - Inglaterra" },
+  { src: "/imagesCTA/EstatuaLibertad.webp", label: "Estatua de la Libertad - EEUU" },
+  { src: "/imagesCTA/ParqueBanff.webp", label: "Parque Nacional Banff - Canada" },
+  { src: "/imagesCTA/BoraBora.webp", label: "Bora Bora" },
+  { src: "/imagesCTA/Glaciar.webp", label: "Glaciar Perito Moreno - Argentina" },
 ];
 
 export function CtaVideosSection() {
@@ -29,7 +30,13 @@ export function CtaVideosSection() {
   return (
     <section className="w-full py-20">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 text-center px-4 sm:px-8 lg:px-16">
-        <div className="max-w-3xl space-y-4">
+        <motion.div
+          className="max-w-3xl space-y-4"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
             Cada destino tiene una historia.
             <br />
@@ -39,16 +46,23 @@ export function CtaVideosSection() {
             Del Caribe a Europa, de la Patagonia a Machu Picchu. Explorá los
             destinos más increíbles y armá tu próximo viaje con nosotros.
           </p>
-        </div>
+        </motion.div>
 
-        <Link href={buildWhatsAppUrl()} target="_blank">
-          <Button
-            size="lg"
-            className="mt-2 rounded-full px-8 text-sm font-semibold"
-          >
-            Consultar mi viaje
-          </Button>
-        </Link>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.18 }}
+        >
+          <Link href={buildWhatsAppUrl()} target="_blank">
+            <Button
+              size="lg"
+              className="mt-2 rounded-full px-8 text-sm font-semibold"
+            >
+              Consultar mi viaje
+            </Button>
+          </Link>
+        </motion.div>
       </div>
 
       {/* Carrusel a ancho completo */}
@@ -64,7 +78,7 @@ export function CtaVideosSection() {
             disableOnInteraction: false,
           }}
           loop
-          slidesPerView={1.2}
+          slidesPerView={1.6}
           spaceBetween={16}
           breakpoints={{
             640: { slidesPerView: 2.2, spaceBetween: 20 },
@@ -79,7 +93,7 @@ export function CtaVideosSection() {
             return (
               <SwiperSlide key={image.src}>
                 <div
-                  className={`relative my-12 h-64 sm:h-72 md:h-80 w-full overflow-hidden rounded-3xl bg-slate-900/60 shadow-lg shadow-slate-950/60 transition-transform duration-500 ${offsetClass} cursor-pointer`}
+                  className={`relative my-12 h-48 sm:h-72 md:h-76 w-full overflow-hidden rounded-3xl bg-slate-900/60 shadow-lg shadow-slate-950/60 transition-transform duration-500 ${offsetClass} cursor-pointer`}
                   onMouseEnter={() => setHoverLabel(image.label)}
                   onMouseLeave={() => setHoverLabel(null)}
                   onClick={() => setSelectedImage(image)}
@@ -88,8 +102,9 @@ export function CtaVideosSection() {
                     src={image.src}
                     alt={image.label}
                     fill
-                    sizes="(max-width: 768px) 100vw, 25vw"
+                    sizes="(max-width: 640px) 65vw, (max-width: 1024px) 45vw, (max-width: 1280px) 32vw, 25vw"
                     className="h-full w-full object-cover"
+                    priority={index === 0}
                   />
                   <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/40 via-black/10 to-transparent" />
                   <span className="absolute bottom-3 left-3 rounded-full bg-black/50 px-2 py-1 text-xs font-medium text-white sm:hidden">

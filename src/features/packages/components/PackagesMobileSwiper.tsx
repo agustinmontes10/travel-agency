@@ -51,7 +51,7 @@ export function PackagesMobileSwiper({ packages }: PackagesMobileSwiperProps) {
                   src={pkg.image}
                   alt={pkg.title}
                   fill
-                  sizes="100vw"
+                  sizes="(max-width: 767px) 90vw, 384px"
                   className="object-fill"
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black/70 via-black/20 to-transparent" />

@@ -1,7 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Button, Input } from "@/components/ui";
 import { Navbar } from "./Navbar";
+import { HeroContent } from "./HeroContent";
 
 interface HeroProps {
   startDateFrom?: string;
@@ -28,41 +27,19 @@ export function Hero({ startDateFrom }: HeroProps) {
       <Navbar whatsappUrl={whatsappUrl} />
 
       <Image
-        src="/HeroCalidad.png"
+        src="/HeroCalidad.webp"
         alt="Destinos icónicos alrededor del mundo"
         fill
-        // width={1000}
-        // height={1000}
         priority
         sizes="100vw"
-        // className="object-cover absolute w-[96%] h-[92%] inset-0 left-[2%] right-[2%] top-auto rounded-4xl object-bottom"
-        className="object-cover object-bottom"
+        className="object-cover object-[60%] md:object-bottom"
       />
-      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-16 space-y-10 text-white">
-        <div className="mx-auto flex max-w-3xl flex-col items-center space-y-6 text-center">
-         
-          <div className="space-y-4">
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl lg:text-[3.2rem] lg:leading-[1.05]">
-              El mundo te espera.
-              <br />
-              Nosotros te llevamos.
-            </h1>
-            <p className="text-sm leading-relaxed sm:text-base">
-              Somos tu agencia de viajes de confianza. Te ayudamos a planificar
-              cada detalle, desde la primera consulta hasta el regreso a casa,
-              para que solo tengas que disfrutar.
-            </p>
-          </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link href="#packages">
-              <Button size="lg" className="px-6">
-                Ver paquetes disponibles
-              </Button>
-            </Link>
-           
-          </div>
-        </div>
+      {/* Overlay radial: oscuro en el centro, transparente en los bordes */}
+      <div className="absolute inset-0 bg-black/5" />
+
+      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-16 text-white">
+        <HeroContent />
       </div>
     </section>
   );

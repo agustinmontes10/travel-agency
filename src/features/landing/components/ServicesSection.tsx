@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "motion/react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui";
 
 const CompassIcon = () => (
@@ -43,10 +46,22 @@ const services = [
   },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export function ServicesSection() {
   return (
     <section id="services" className="space-y-8">
-      <div className="space-y-3 text-center">
+      <motion.div
+        className="space-y-3 text-center"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
           Por qué elegirnos
         </p>
@@ -58,21 +73,30 @@ export function ServicesSection() {
           marcan la diferencia. Por eso nos ocupamos de todo, para que vos solo
           te ocupes de disfrutar.
         </p>
-      </div>
+      </motion.div>
 
       <div className="grid gap-5 md:grid-cols-3">
-        {services.map((service) => (
-          <Card key={service.title} className="h-full bg-surface/90 shadow-soft border-0">
-            <CardHeader className="gap-4">
-              <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-accent-soft">
-                {service.icon}
-              </div>
-              <CardTitle className="text-base sm:text-lg">{service.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-sm leading-relaxed">{service.description}</CardDescription>
-            </CardContent>
-          </Card>
+        {services.map((service, i) => (
+          <motion.div
+            key={service.title}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: i * 0.12 }}
+          >
+            <Card className="h-full bg-surface/90 shadow-soft border-0">
+              <CardHeader className="gap-4">
+                <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-accent-soft">
+                  {service.icon}
+                </div>
+                <CardTitle className="text-base sm:text-lg">{service.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-sm leading-relaxed">{service.description}</CardDescription>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
       </div>
     </section>

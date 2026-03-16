@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { PackagesSectionHeader } from "./PackagesSectionHeader";
 import { PackagesFilter } from "./PackagesFilter";
 import { PackagesResults } from "./PackagesResults";
 import { PackagesSkeleton } from "./PackagesSkeleton";
@@ -29,17 +30,7 @@ export function PublicPackagesSection({ title, month, type }: PublicPackagesSect
 
   return (
     <section id="packages" className="space-y-8">
-      <div className="space-y-3 text-center">
-        <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
-          Paquetes destacados
-        </p>
-        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-          Una selección de experiencias listas para reservar.
-        </h2>
-        <p className="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Buscá tu próximo destino por nombre, mes de salida o tipo de viaje.
-        </p>
-      </div>
+      <PackagesSectionHeader />
 
       <PackagesFilter title={title} month={month} type={type} />
 

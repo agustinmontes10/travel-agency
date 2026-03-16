@@ -8,10 +8,8 @@ interface PackagesResultsProps {
   hasActiveFilters: boolean;
 }
 
-const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
-
 export async function PackagesResults({ filters, hasActiveFilters }: PackagesResultsProps) {
-  const [packages] = await Promise.all([listPackages(filters), sleep(500)]);
+  const packages = await listPackages(filters);
 
   if (packages.length === 0) {
     return (
