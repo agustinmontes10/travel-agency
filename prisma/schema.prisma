@@ -14,10 +14,16 @@ datasource db {
   // url is configured in prisma.config.ts (Prisma 7)
 }
 
+enum PackageType {
+  NACIONAL
+  INTERNACIONAL
+}
+
 model Package {
-  id        String   @id @default(cuid())
+  id        String      @id @default(cuid())
   title     String
   image     String
-  startDate DateTime
-  createdAt DateTime @default(now())
+  months    Int[]       @default([])
+  type      PackageType @default(NACIONAL)
+  createdAt DateTime    @default(now())
 }

@@ -6,12 +6,10 @@ import { listPackages } from "@/features/packages/service";
 import { deletePackageAction } from "@/features/packages/actions";
 import { Button } from "@/components/ui";
 
-function formatDate(date: Date) {
-  return new Intl.DateTimeFormat("es-AR", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(date);
+const MONTH_NAMES = ["", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+
+function formatMonths(months: number[]) {
+  return [...months].sort((a, b) => a - b).map((m) => MONTH_NAMES[m]).join(", ");
 }
 
 export default async function AdminPackagesPage() {
@@ -43,7 +41,8 @@ export default async function AdminPackagesPage() {
               <tr className="border-b border-border-subtle bg-surface-muted text-left">
                 <th className="px-4 py-3 font-medium text-muted-foreground">Imagen</th>
                 <th className="px-4 py-3 font-medium text-muted-foreground">Título</th>
-                <th className="px-4 py-3 font-medium text-muted-foreground">Fecha de inicio</th>
+                <th className="px-4 py-3 font-medium text-muted-foreground">Tipo</th>
+                <th className="px-4 py-3 font-medium text-muted-foreground">Meses</th>
                 <th className="px-4 py-3 font-medium text-muted-foreground">Acciones</th>
               </tr>
             </thead>
@@ -62,7 +61,16 @@ export default async function AdminPackagesPage() {
                     </div>
                   </td>
                   <td className="px-4 py-3 font-medium">{pkg.title}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{formatDate(pkg.startDate)}</td>
+                  <td className="px-4 py-3">
+                    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                      pkg.type === "NACIONAL"
+                        ? "bg-emerald-50 text-emerald-700"
+                        : "bg-blue-50 text-blue-700"
+                    }`}>
+                      {pkg.type === "NACIONAL" ? "Nacional" : "Internacional"}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 text-muted-foreground">{formatMonths(pkg.months)}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <Link

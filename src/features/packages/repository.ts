@@ -6,21 +6,21 @@ export async function create(data: CreatePackageInput) {
 }
 
 export interface FindAllParams {
-  startDateFrom?: Date;
+  month?: number;
+  type?: 'NACIONAL' | 'INTERNACIONAL';
   title?: string;
 }
 
 export async function findAll(params: FindAllParams = {}) {
-  const { startDateFrom, title } = params;
+  const { month, type, title } = params;
 
   return db.package.findMany({
     where: {
-      ...(startDateFrom && { startDate: { gte: startDateFrom } }),
+      ...(month && { months: { has: month } }),
+      ...(type && { type }),
       ...(title && { title: { contains: title, mode: "insensitive" } }),
     },
-    orderBy: {
-      startDate: "asc",
-    },
+    orderBy: { createdAt: "desc" },
   });
 }
 

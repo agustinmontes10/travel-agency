@@ -2,6 +2,21 @@ import Link from "next/link";
 import { createPackageAction } from "@/features/packages/actions";
 import { Button, Input, Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui";
 
+const MONTHS = [
+  { value: 1, label: "Enero" },
+  { value: 2, label: "Febrero" },
+  { value: 3, label: "Marzo" },
+  { value: 4, label: "Abril" },
+  { value: 5, label: "Mayo" },
+  { value: 6, label: "Junio" },
+  { value: 7, label: "Julio" },
+  { value: 8, label: "Agosto" },
+  { value: 9, label: "Septiembre" },
+  { value: 10, label: "Octubre" },
+  { value: 11, label: "Noviembre" },
+  { value: 12, label: "Diciembre" },
+];
+
 export default function NewPackagePage() {
   return (
     <div className="space-y-6">
@@ -35,10 +50,29 @@ export default function NewPackagePage() {
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="startDate" className="text-sm font-medium">
-                Fecha de inicio <span className="text-red-500">*</span>
-              </label>
-              <Input id="startDate" name="startDate" type="date" required />
+              <p className="text-sm font-medium">Tipo <span className="text-red-500">*</span></p>
+              <div className="flex gap-6">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="type" value="NACIONAL" required className="accent-accent" />
+                  <span className="text-sm">Nacional</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="type" value="INTERNACIONAL" className="accent-accent" />
+                  <span className="text-sm">Internacional</span>
+                </label>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <p className="text-sm font-medium">Meses de salida <span className="text-red-500">*</span></p>
+              <div className="grid grid-cols-3 gap-2">
+                {MONTHS.map((m) => (
+                  <label key={m.value} className="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" name="months" value={m.value} className="accent-accent" />
+                    <span className="text-sm">{m.label}</span>
+                  </label>
+                ))}
+              </div>
             </div>
 
             <div className="flex gap-3 pt-2">

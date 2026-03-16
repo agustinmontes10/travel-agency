@@ -1,8 +1,10 @@
 import * as repo from "./repository";
 import type { CreatePackageInput, UpdatePackageInput } from "./schemas";
+import type { PackageType } from "./schemas";
 
 export interface ListPackagesParams {
-  startDateFrom?: Date;
+  month?: number;
+  type?: PackageType;
   title?: string;
 }
 
@@ -10,7 +12,8 @@ export interface PublicPackage {
   id: string;
   title: string;
   image: string;
-  startDate: Date;
+  months: number[];
+  type: PackageType;
   createdAt: Date;
 }
 

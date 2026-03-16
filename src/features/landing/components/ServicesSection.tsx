@@ -24,22 +24,22 @@ const ShieldIcon = () => (
 
 const services = [
   {
-    title: "Atención personalizada",
+    title: "Paquetes a medida",
     icon: <CompassIcon />,
     description:
-      "Te asesoramos en cada etapa del viaje para encontrar la mejor opción según tus gustos, presupuesto y fechas.",
+      "Armamos tu viaje según tus gustos, fechas y presupuesto. Nacionales e internacionales, para grupos, parejas o familias.",
   },
   {
-    title: "Asesoramiento humano",
+    title: "Asesoramiento sin costo",
     icon: <ChatIcon />,
     description:
-      "Te ayudamos a elegir destinos, rutas y experiencias aprovechando nuestro conocimiento del mercado y las mejores opciones disponibles.",
+      "Consultanos por WhatsApp o en persona. Te orientamos sobre destinos, temporadas, documentación y todo lo que necesitás saber antes de viajar.",
   },
   {
-    title: "Acompañamiento durante tu viaje",
+    title: "Respaldo en todo momento",
     icon: <ShieldIcon />,
     description:
-      "Estamos disponibles antes, durante y después de tu viaje para resolver dudas, cambios o cualquier imprevisto.",
+      "Estamos disponibles antes, durante y después de tu viaje para resolver cualquier cambio, duda o imprevisto que surja en el camino.",
   },
 ];
 
@@ -51,11 +51,12 @@ export function ServicesSection() {
           Por qué elegirnos
         </p>
         <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-          Viajás tranquilo porque estás bien acompañado.
+          Viajás tranquilo porque estás en buenas manos.
         </h2>
         <p className="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Nos especializamos en armar paquetes a medida para que cada viaje
-          sea una experiencia única, sin sorpresas ni imprevistos.
+          Años de experiencia organizando viajes nos enseñaron que los detalles
+          marcan la diferencia. Por eso nos ocupamos de todo, para que vos solo
+          te ocupes de disfrutar.
         </p>
       </div>
 

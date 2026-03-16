@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button, Input } from "@/components/ui";
+import { Navbar } from "./Navbar";
 
 interface HeroProps {
   startDateFrom?: string;
@@ -24,42 +25,7 @@ export function Hero({ startDateFrom }: HeroProps) {
   return (
     <section className="overflow-hidden min-h-screen flex flex-col items-center justify-center">
 
-      <header className="mx-auto flex max-w-6xl w-full items-center justify-between pt-6 text-sm absolute z-1 top-0">
-        <Link href="#home" className="inline-flex items-center">
-          <Image
-            src="/Logo2.png"
-            alt="mt turismo Gonzales Chaves"
-            width={180}
-            height={48}
-            priority
-            className="h-10 w-auto sm:h-12"
-          />
-        </Link>
-
-        <nav className="hidden items-center gap-8 text-xs font-medium uppercase tracking-[0.22em] text-slate-100 sm:flex">
-          <Link href="#home" className="hover:text-white">
-            Home
-          </Link>
-          <Link href="#packages" className="hover:text-white">
-            Paquetes
-          </Link>
-          <Link href="#services" className="hover:text-white">
-            Servicios
-          </Link>
-          <Link href="#contact" className="hover:text-white">
-            Contacto
-          </Link>
-          <Link href={whatsappUrl} aria-label="Agendar por WhatsApp">
-            <Button
-              size="md"
-              variant="secondary"
-              className="rounded-full px-5 text-xs font-semibold uppercase tracking-[0.22em]"
-            >
-              Consultar ahora
-            </Button>
-          </Link>
-        </nav>
-      </header>
+      <Navbar whatsappUrl={whatsappUrl} />
 
       <Image
         src="/HeroCalidad.png"
@@ -77,14 +43,14 @@ export function Hero({ startDateFrom }: HeroProps) {
          
           <div className="space-y-4">
             <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl lg:text-[3.2rem] lg:leading-[1.05]">
-              Diseñamos experiencias de viaje
+              El mundo te espera.
               <br />
-              con una capa visual de 2026.
+              Nosotros te llevamos.
             </h1>
             <p className="text-sm leading-relaxed sm:text-base">
-              Presentá tus destinos, paquetes y servicios con una landing moderna,
-              optimizada para móviles y pensada para convertir visitantes en
-              consultas reales por WhatsApp.
+              Somos tu agencia de viajes de confianza. Te ayudamos a planificar
+              cada detalle, desde la primera consulta hasta el regreso a casa,
+              para que solo tengas que disfrutar.
             </p>
           </div>
 

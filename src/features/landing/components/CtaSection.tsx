@@ -8,6 +8,7 @@ import { Autoplay } from "swiper/modules";
 import { Button } from "@/components/ui";
 
 import "swiper/css";
+import { buildWhatsAppUrl } from "./ContactSection";
 
 const CTA_IMAGES = [
   { src: "/imagesCTA/Caribe.jpg", label: "Playa caribeña" },
@@ -30,23 +31,22 @@ export function CtaVideosSection() {
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 text-center px-4 sm:px-8 lg:px-16">
         <div className="max-w-3xl space-y-4">
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-            Empieza a explorar y convierte tu viaje
+            Cada destino tiene una historia.
             <br />
-            en una experiencia inolvidable.
+            ¿Cuál será la tuya?
           </h2>
-          <p className="text-sm text-slate-200/80 sm:text-base">
-            Mostrá tus destinos estrella con videos inmersivos. Mientras tus
-            visitantes leen el contenido, los videos se reproducen uno tras otro,
-            sin saturar la pantalla.
+          <p className="text-sm text-muted-foreground sm:text-base">
+            Del Caribe a Europa, de la Patagonia a Machu Picchu. Explorá los
+            destinos más increíbles y armá tu próximo viaje con nosotros.
           </p>
         </div>
 
-        <Link href="#contact">
+        <Link href={buildWhatsAppUrl()} target="_blank">
           <Button
             size="lg"
             className="mt-2 rounded-full px-8 text-sm font-semibold"
           >
-            Reservar tu lugar
+            Consultar mi viaje
           </Button>
         </Link>
       </div>

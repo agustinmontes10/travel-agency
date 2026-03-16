@@ -18,7 +18,8 @@ export async function createPackageAction(formData: FormData) {
   const parsed = CreatePackageSchema.parse({
     title: formData.get("title"),
     image: imageUrl,
-    startDate: formData.get("startDate"),
+    months: formData.getAll("months"),
+    type: formData.get("type"),
   });
 
   await createPackage(parsed);
@@ -40,9 +41,12 @@ export async function updatePackageAction(id: string, formData: FormData) {
     imageUrl = await uploadPackageImage(file);
   }
 
+  const monthsRaw = formData.getAll("months");
+
   const raw: Record<string, unknown> = {
     title: formData.get("title") || undefined,
-    startDate: formData.get("startDate") || undefined,
+    type: formData.get("type") || undefined,
+    ...(monthsRaw.length > 0 && { months: monthsRaw }),
   };
   if (imageUrl) raw.image = imageUrl;
 
