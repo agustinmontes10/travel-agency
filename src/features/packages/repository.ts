@@ -7,19 +7,17 @@ export async function create(data: CreatePackageInput) {
 
 export interface FindAllParams {
   startDateFrom?: Date;
+  title?: string;
 }
 
 export async function findAll(params: FindAllParams = {}) {
-  const { startDateFrom } = params;
+  const { startDateFrom, title } = params;
 
   return db.package.findMany({
-    where: startDateFrom
-      ? {
-          startDate: {
-            gte: startDateFrom,
-          },
-        }
-      : undefined,
+    where: {
+      ...(startDateFrom && { startDate: { gte: startDateFrom } }),
+      ...(title && { title: { contains: title, mode: "insensitive" } }),
+    },
     orderBy: {
       startDate: "asc",
     },

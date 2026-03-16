@@ -8,18 +8,21 @@ import { CtaVideosSection } from "@/features/landing/components/CtaSection";
 import Image from "next/image";
 
 interface LandingPageProps {
-  searchParams?: {
+  searchParams?: Promise<{
     startDateFrom?: string;
-  };
+    title?: string;
+  }>;
 }
 
 export default async function LandingPage({ searchParams }: LandingPageProps) {
-  const startDateFrom = searchParams?.startDateFrom;
+  const params = await searchParams;
+  const startDateFrom = params?.startDateFrom;
+  const title = params?.title;
 
   return (
     <main id="home" className="flex flex-1 flex-col gap-16 md:gap-20 lg:gap-24">
       <Hero />
-      <PublicPackagesSection startDateFrom={startDateFrom} />
+      <PublicPackagesSection startDateFrom={startDateFrom} title={title} />
       <ServicesSection />
       <CtaVideosSection />
       <ContactSection />

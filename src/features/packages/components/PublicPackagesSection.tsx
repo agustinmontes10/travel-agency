@@ -1,33 +1,46 @@
 import { listPackages, type ListPackagesParams } from "@/features/packages/service";
 import { Card, CardHeader, CardTitle, CardDescription, Input, Button } from "@/components/ui";
-import Image from "next/image";
 import { PackagesMobileSwiper } from "./PackagesMobileSwiper";
 import { PackagesSwiper } from "./PackagesSwiper";
 
 interface PublicPackagesSectionProps {
   startDateFrom?: string;
+  title?: string;
 }
 
-function parseFilters(startDateFrom?: string): ListPackagesParams {
-  if (!startDateFrom) return {};
+function parseFilters(startDateFrom?: string, title?: string): ListPackagesParams {
+  const params: ListPackagesParams = {};
 
-  const parsed = new Date(startDateFrom);
-  if (Number.isNaN(parsed.getTime())) return {};
+  if (title?.trim()) params.title = title.trim();
 
-  return { startDateFrom: parsed };
+  if (startDateFrom) {
+    const parsed = new Date(startDateFrom);
+    if (!Number.isNaN(parsed.getTime())) params.startDateFrom = parsed;
+  }
+
+  return params;
 }
 
-function formatDate(date: Date) {
-  return new Intl.DateTimeFormat("es-AR", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(date);
-}
+const SearchIcon = () => (
+  <svg className="h-4 w-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+  </svg>
+);
 
-export async function PublicPackagesSection({ startDateFrom }: PublicPackagesSectionProps) {
-  const filters = parseFilters(startDateFrom);
+const CalendarIcon = () => (
+  <svg className="h-4 w-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="21" y2="10" />
+  </svg>
+);
+
+export async function PublicPackagesSection({ startDateFrom, title }: PublicPackagesSectionProps) {
+  const filters = parseFilters(startDateFrom, title);
   const packages = await listPackages(filters);
+  const hasActiveFilters = !!(title?.trim() || startDateFrom);
 
   return (
     <section id="packages" className="space-y-8">
@@ -39,46 +52,79 @@ export async function PublicPackagesSection({ startDateFrom }: PublicPackagesSec
           Una selección de experiencias listas para reservar.
         </h2>
         <p className="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Mostrá tus próximos viajes con tarjetas visuales, fechas claras y un
-          diseño limpio inspirado en las mejores webs de alojamiento de 2026.
+          Buscá tu próximo destino por nombre o filtrá por fecha de salida.
         </p>
       </div>
 
-      <form
-        method="get"
-        className="mx-auto flex w-full max-w-xl flex-col gap-3 rounded-full bg-surface p-2 shadow-soft sm:flex-row sm:items-center"
-      >
-        <div className="flex-1">
-          <label
-            htmlFor="startDateFrom"
-            className="mb-1 block text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-muted-foreground"
-          >
-            Fecha desde
-          </label>
-          <Input
-            id="startDateFrom"
-            name="startDateFrom"
-            type="date"
-            defaultValue={startDateFrom}
-            className="h-10 bg-surface-muted"
-          />
-        </div>
-        <div className="flex items-end justify-end">
-          <Button type="submit" size="md" className="px-6">
-            Filtrar
-          </Button>
+      {/* Filtro */}
+      <form method="get" className="mx-auto w-full max-w-2xl">
+        <div className="flex flex-col gap-2 rounded-2xl border border-border-subtle bg-surface p-2 shadow-soft sm:flex-row sm:items-center sm:gap-0 sm:divide-x sm:divide-border-subtle sm:rounded-full sm:p-1.5">
+
+          {/* Campo: título */}
+          <div className="flex flex-1 items-center gap-2 px-3 py-1.5 sm:px-4">
+            <SearchIcon />
+            <div className="flex flex-1 flex-col">
+              <label htmlFor="title" className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Destino
+              </label>
+              <input
+                id="title"
+                name="title"
+                type="text"
+                defaultValue={title}
+                placeholder="Ej: París, Caribe…"
+                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground/60"
+              />
+            </div>
+          </div>
+
+          {/* Campo: fecha */}
+          <div className="flex flex-1 items-center gap-2 px-3 py-1.5 sm:px-4">
+            <CalendarIcon />
+            <div className="flex flex-1 flex-col">
+              <label htmlFor="startDateFrom" className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Fecha desde
+              </label>
+              <Input
+                id="startDateFrom"
+                name="startDateFrom"
+                type="date"
+                defaultValue={startDateFrom}
+                className="h-auto border-0 bg-transparent p-0 text-sm shadow-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+              />
+            </div>
+          </div>
+
+          {/* Botón */}
+          <div className="flex items-center gap-2 px-1.5 sm:pl-3">
+            <Button type="submit" variant="primary" size="md" className="w-full sm:w-auto sm:px-6">
+              Buscar
+            </Button>
+            {hasActiveFilters && (
+              <a
+                href="#packages"
+                className="whitespace-nowrap text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground"
+              >
+                Limpiar
+              </a>
+            )}
+          </div>
         </div>
       </form>
 
+      {/* Resultados */}
       {packages.length === 0 ? (
         <Card className="mt-2 border-dashed bg-surface/90">
           <CardHeader>
             <CardTitle className="text-base">
-              Aún no hay paquetes cargados para esta fecha.
+              {hasActiveFilters
+                ? "No hay paquetes que coincidan con tu búsqueda."
+                : "Aún no hay paquetes cargados."}
             </CardTitle>
             <CardDescription>
-              Cuando crees tus primeros paquetes desde el panel de administración,
-              van a aparecer automáticamente en esta sección.
+              {hasActiveFilters
+                ? "Probá con otro destino o sin filtro de fecha."
+                : "Cuando crees tus primeros paquetes desde el panel de administración, van a aparecer automáticamente en esta sección."}
             </CardDescription>
           </CardHeader>
         </Card>
@@ -91,4 +137,3 @@ export async function PublicPackagesSection({ startDateFrom }: PublicPackagesSec
     </section>
   );
 }
-

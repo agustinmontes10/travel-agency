@@ -3,6 +3,7 @@ import type { CreatePackageInput, UpdatePackageInput } from "./schemas";
 
 export interface ListPackagesParams {
   startDateFrom?: Date;
+  title?: string;
 }
 
 export interface PublicPackage {
