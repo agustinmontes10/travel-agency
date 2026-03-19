@@ -35,7 +35,7 @@ export function PackageCard({ pkg }: PackageCardProps) {
   return (
     <>
       <article
-        className="group relative overflow-hidden rounded-2xl border border-border-subtle shadow-soft cursor-pointer transition-transform duration-200 shadow-xl shadow-muted-foreground"
+        className="group relative overflow-hidden rounded-2xl rounded-tl-none border border-border-subtle shadow-soft cursor-pointer transition-transform duration-200 shadow-xl shadow-muted-foreground"
         onClick={() => setOpen(true)}
       >
         <div className="relative aspect-[3/4] overflow-hidden">
@@ -46,11 +46,11 @@ export function PackageCard({ pkg }: PackageCardProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             className="object-fill transition-transform duration-300"
           />
-          <div className="absolute top-3 left-3">
-            <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+          <div className="absolute -top-1 left-0">
+            <span className={`inline-flex items-center rounded-br-full px-3.5 py-1 text-xs font-medium ${
               pkg.type === "NACIONAL"
                 ? "bg-emerald-50/90 text-emerald-700"
-                : "bg-blue-50/90 text-blue-700"
+                : "bg-accent-soft text-accent"
             }`}>
               {pkg.type === "NACIONAL" ? "Nacional" : "Internacional"}
             </span>
