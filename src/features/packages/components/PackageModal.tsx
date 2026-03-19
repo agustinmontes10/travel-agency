@@ -54,7 +54,7 @@ export function PackageModal({ pkg, onClose }: PackageModalProps) {
             alt={pkg.title}
             fill
             sizes="(max-width: 768px) 100vw, 672px"
-            className="object-cover"
+            className="object-fill"
             priority
           />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black/80 to-transparent" />

@@ -1,17 +1,12 @@
-export function PackagesSkeleton() {
+export function PackagesSkeleton({ count = 6, mobileCount }: { count?: number; mobileCount?: number }) {
   return (
-    <div>
-      {/* Desktop */}
-      <div className="hidden md:flex justify-center pt-2">
-        <div className="w-full max-w-sm">
-          <div className="animate-pulse overflow-hidden rounded-3xl bg-surface-muted" style={{ height: "36rem" }} />
-        </div>
-      </div>
-
-      {/* Mobile */}
-      <div className="md:hidden pt-2">
-        <div className="mx-auto max-w-xs animate-pulse overflow-hidden rounded-3xl bg-surface-muted" style={{ height: "55vh" }} />
-      </div>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {Array.from({ length: count }).map((_, i) => (
+        <div
+          key={i}
+          className={`animate-pulse overflow-hidden rounded-2xl bg-surface-muted aspect-[3/4]${mobileCount !== undefined && i >= mobileCount ? " hidden sm:block" : ""}`}
+        />
+      ))}
     </div>
   );
 }

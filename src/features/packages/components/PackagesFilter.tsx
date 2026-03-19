@@ -8,6 +8,7 @@ interface PackagesFilterProps {
   title?: string;
   month?: string;
   type?: string;
+  basePath?: string;
 }
 
 const MONTHS = [
@@ -32,13 +33,14 @@ const SearchIcon = () => (
   </svg>
 );
 
-export function PackagesFilter({ title, month, type }: PackagesFilterProps) {
+export function PackagesFilter({ title, month, type, basePath = "/" }: PackagesFilterProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const titleRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLSelectElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
   const hasActiveFilters = !!(title?.trim() || month || type);
+  const isHome = basePath === "/";
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -50,14 +52,15 @@ export function PackagesFilter({ title, month, type }: PackagesFilterProps) {
     if (m) params.set("month", m);
     if (ty) params.set("type", ty);
     const query = params.toString();
+    const hash = isHome ? "#packages" : "";
     startTransition(() => {
-      router.push(`/${query ? `?${query}` : ""}#packages`, { scroll: false });
+      router.push(`${basePath}${query ? `?${query}` : ""}${hash}`, { scroll: false });
     });
   }
 
   function handleClear() {
     startTransition(() => {
-      router.push("/#packages", { scroll: false });
+      router.push(isHome ? "/#packages" : basePath, { scroll: false });
     });
   }
 

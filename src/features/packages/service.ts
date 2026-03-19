@@ -39,3 +39,30 @@ export async function listPackages(
   const result = await repo.findAll(params);
   return result as PublicPackage[];
 }
+
+export interface PaginatedPackages {
+  packages: PublicPackage[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}
+
+export async function listPackagesPaginated(
+  params?: ListPackagesParams,
+  page = 1,
+  pageSize = 10,
+): Promise<PaginatedPackages> {
+  const skip = (page - 1) * pageSize;
+  const [result, total] = await Promise.all([
+    repo.findPaginated(params ?? {}, skip, pageSize),
+    repo.count(params ?? {}),
+  ]);
+  return {
+    packages: result as PublicPackage[],
+    total,
+    page,
+    pageSize,
+    totalPages: Math.max(1, Math.ceil(total / pageSize)),
+  };
+}

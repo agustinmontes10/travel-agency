@@ -11,17 +11,33 @@ export interface FindAllParams {
   title?: string;
 }
 
-export async function findAll(params: FindAllParams = {}) {
+function buildWhere(params: FindAllParams) {
   const { month, type, title } = params;
+  return {
+    ...(month && { months: { has: month } }),
+    ...(type && { type }),
+    ...(title && { title: { contains: title, mode: "insensitive" as const } }),
+  };
+}
 
+export async function findAll(params: FindAllParams = {}) {
   return db.package.findMany({
-    where: {
-      ...(month && { months: { has: month } }),
-      ...(type && { type }),
-      ...(title && { title: { contains: title, mode: "insensitive" } }),
-    },
+    where: buildWhere(params),
     orderBy: { createdAt: "desc" },
   });
+}
+
+export async function findPaginated(params: FindAllParams = {}, skip: number, take: number) {
+  return db.package.findMany({
+    where: buildWhere(params),
+    orderBy: { createdAt: "desc" },
+    skip,
+    take,
+  });
+}
+
+export async function count(params: FindAllParams = {}) {
+  return db.package.count({ where: buildWhere(params) });
 }
 
 export async function findById(id: string) {

@@ -34,7 +34,7 @@ export function PublicPackagesSection({ title, month, type }: PublicPackagesSect
 
       <PackagesFilter title={title} month={month} type={type} />
 
-      <Suspense key={suspenseKey} fallback={<PackagesSkeleton />}>
+      <Suspense key={suspenseKey} fallback={<PackagesSkeleton count={6} mobileCount={4} />}>
         <PackagesResults filters={filters} hasActiveFilters={hasActiveFilters} />
       </Suspense>
     </section>
