@@ -50,7 +50,7 @@ export function PackageCard({ pkg }: PackageCardProps) {
             <span className={`inline-flex items-center rounded-br-full px-3.5 py-1 text-xs font-medium ${
               pkg.type === "NACIONAL"
                 ? "bg-emerald-50/90 text-emerald-700"
-                : "bg-accent-soft text-accent"
+                : "bg-surface-muted text-accent"
             }`}>
               {pkg.type === "NACIONAL" ? "Nacional" : "Internacional"}
             </span>
