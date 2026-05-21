@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cd \"C:/workspacePersonal/travel-agency\" && npm run build 2>&1 | tail -20)"
+      "Bash(cd \"C:/workspacePersonal/travel-agency\" && npm run build 2>&1 | tail -20)",
+      "Bash(grep -r \"swiper\\\\|Swiper\" --include=\"*.tsx\" --include=\"*.ts\" --include=\"*.json\" src/ 2>/dev/null | head -30)",
+      "Bash(cd \"C:/workspacePersonal/travel-agency\" && npm uninstall swiper 2>&1)",
+      "Bash(cd \"C:/workspacePersonal/travel-agency\" && npm run lint 2>&1)",
+      "Bash(cd \"C:/workspacePersonal/travel-agency\" && npx tsc --noEmit 2>&1)",
+      "Bash(cd \"C:/workspacePersonal/travel-agency\" && npm install swiper 2>&1)",
+      "Bash(cd \"C:/workspacePersonal/travel-agency\" && npx vercel --prod 2>&1)",
+      "Bash(cd C:/workspacePersonal/travel-agency && npm install @vercel/analytics)"
     ]
   }
 }
