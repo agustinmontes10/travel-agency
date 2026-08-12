@@ -3,6 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { track } from "@vercel/analytics";
+import { EASE_OUT } from "@/components/ui";
+import { packageImagePlaceholder } from "@/lib/image-placeholder";
 import type { PublicPackage } from "@/features/packages/service";
 import { PackageModal } from "./PackageModal";
 
@@ -27,55 +31,83 @@ const WhatsAppIcon = () => (
 
 interface PackageCardProps {
   pkg: PublicPackage;
+  /** Índice dentro de la grilla, para el stagger del reveal */
+  index?: number;
 }
 
-export function PackageCard({ pkg }: PackageCardProps) {
+export function PackageCard({ pkg, index = 0 }: PackageCardProps) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <article
-        className="group relative overflow-hidden rounded-2xl rounded-tl-none border border-border-subtle shadow-soft cursor-pointer transition-transform duration-200 shadow-xl shadow-muted-foreground"
+      <motion.article
+        className="group relative overflow-hidden rounded-2xl border border-border-subtle bg-surface cursor-pointer shadow-[0_1px_2px_rgba(19,36,59,0.05),0_16px_40px_-24px_rgba(19,36,59,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_2px_4px_rgba(19,36,59,0.06),0_24px_56px_-24px_rgba(19,36,59,0.4)]"
         onClick={() => setOpen(true)}
+        initial={{ opacity: 0, y: 36 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.7, ease: EASE_OUT, delay: (index % 3) * 0.1 }}
       >
-        <div className="relative aspect-[3/4] overflow-hidden">
+        <div className="relative aspect-[3/4] overflow-hidden bg-surface-muted">
+          {/* Fondo: el mismo flyer desenfocado rellena el letterbox cuando la proporción no coincide */}
+          <Image
+            src={pkg.image}
+            alt=""
+            aria-hidden
+            fill
+            sizes="200px"
+            quality={20}
+            className="scale-110 object-cover blur-xl brightness-90 saturate-75"
+          />
           <Image
             src={pkg.image}
             alt={pkg.title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-            className="object-fill transition-transform duration-300"
+            placeholder="blur"
+            blurDataURL={packageImagePlaceholder}
+            className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]"
           />
-          <div className="absolute -top-1 left-0">
-            <span className={`inline-flex items-center rounded-br-full px-3.5 py-1 text-xs font-medium ${
+          {/* Sheen: brillo diagonal que barre la imagen al hover */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 -left-3/4 w-1/2 rotate-12 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 transition-all duration-700 ease-out group-hover:left-[125%] group-hover:opacity-100"
+          />
+          <div className="absolute top-3 left-3">
+            <span className={`inline-flex items-center rounded-full px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] backdrop-blur-sm ${
               pkg.type === "NACIONAL"
-                ? "bg-emerald-50/90 text-emerald-700"
-                : "bg-surface-muted text-accent"
+                ? "bg-background/95 text-navy-deep"
+                : "bg-navy-deep/85 text-sand"
             }`}>
               {pkg.type === "NACIONAL" ? "Nacional" : "Internacional"}
             </span>
           </div>
         </div>
 
-        <div className="bg-accent-soft px-4 py-3">
-          <p className="text-sm font-semibold leading-snug text-foreground">{pkg.title}</p>
+        <div className="border-t border-border-subtle bg-surface px-4 py-4">
+          <p className="font-display text-lg leading-snug tracking-tight text-foreground">{pkg.title}</p>
           {pkg.months.length > 0 && (
-            <p className="mt-1 text-xs text-muted-foreground">{formatMonths(pkg.months)}</p>
+            <p className="mt-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-gold">{formatMonths(pkg.months)}</p>
           )}
 
           <Link
             href={buildWhatsAppUrl(pkg.title)}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-xs font-semibold text-white transition-colors hover:bg-[#1ebe5d]"
+            onClick={(e) => {
+              e.stopPropagation();
+              track("whatsapp_click", { source: "package_card", package: pkg.title });
+            }}
+            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-xs font-semibold text-white transition-all duration-200 hover:bg-[#1ebe5d] hover:-translate-y-px"
           >
             <WhatsAppIcon />
             Quiero info
           </Link>
         </div>
-      </article>
-      {open && <PackageModal pkg={pkg} onClose={() => setOpen(false)} />}
+      </motion.article>
+      <AnimatePresence>
+        {open && <PackageModal pkg={pkg} onClose={() => setOpen(false)} />}
+      </AnimatePresence>
     </>
   );
 }

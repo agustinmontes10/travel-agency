@@ -66,13 +66,13 @@ export function PackagesFilter({ title, month, type, basePath = "/" }: PackagesF
 
   return (
     <form onSubmit={handleSubmit} className="mx-auto w-full max-w-2xl">
-      <div className="flex flex-col gap-2 rounded-2xl border border-border-subtle bg-surface p-2 shadow-soft sm:flex-row sm:items-center sm:gap-0 sm:divide-x sm:divide-border-subtle sm:rounded-full sm:p-1.5">
+      <div className="flex flex-col gap-2 rounded-2xl border border-border-subtle bg-surface p-2 shadow-[0_1px_2px_rgba(19,36,59,0.04),0_16px_40px_-24px_rgba(19,36,59,0.3)] transition-colors focus-within:border-gold/40 sm:flex-row sm:items-center sm:gap-0 sm:divide-x sm:divide-border-subtle sm:rounded-full sm:p-1.5">
 
         {/* Campo: título */}
         <div className="flex flex-1 items-center gap-2 px-3 py-1.5 sm:px-4">
           <SearchIcon />
           <div className="flex flex-1 flex-col">
-            <label htmlFor="title" className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <label htmlFor="title" className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-gold">
               Destino
             </label>
             <input
@@ -90,7 +90,7 @@ export function PackagesFilter({ title, month, type, basePath = "/" }: PackagesF
         {/* Campo: mes */}
         <div className="flex flex-1 items-center gap-2 px-3 py-1.5 sm:px-4">
           <div className="flex flex-1 flex-col">
-            <label htmlFor="month" className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <label htmlFor="month" className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-gold">
               Mes de salida
             </label>
             <select
@@ -111,7 +111,7 @@ export function PackagesFilter({ title, month, type, basePath = "/" }: PackagesF
         {/* Campo: tipo */}
         <div className="flex flex-1 items-center gap-2 px-3 py-1.5 sm:px-4">
           <div className="flex flex-1 flex-col">
-            <label htmlFor="type" className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <label htmlFor="type" className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-gold">
               Tipo
             </label>
             <select

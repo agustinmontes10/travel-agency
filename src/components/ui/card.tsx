@@ -1,13 +1,13 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes } from "react";
 import { cn } from "@/lib/cn";
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {}
+export type CardProps = HTMLAttributes<HTMLDivElement>;
 
 export function Card({ className, ...props }: CardProps) {
   return (
     <div
       className={cn(
-        "rounded-2xl border border-border-subtle bg-surface/90 p-6 shadow-soft backdrop-blur-sm",
+        "rounded-2xl border border-border-subtle bg-surface p-6 shadow-[0_1px_2px_rgba(19,36,59,0.04),0_16px_40px_-24px_rgba(19,36,59,0.25)]",
         className
       )}
       {...props}
@@ -40,7 +40,7 @@ export function CardTitle({ className, ...props }: HTMLAttributes<HTMLElement>) 
   return (
     <h2
       className={cn(
-        "text-lg font-semibold tracking-tight text-foreground",
+        "font-display text-lg font-semibold tracking-tight text-foreground",
         className
       )}
       {...props}

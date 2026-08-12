@@ -1,10 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import { Reveal } from "@/components/ui";
 import { PackagesFilter } from "@/features/packages/components/PackagesFilter";
 import { PackagesPageResults } from "@/features/packages/components/PackagesPageResults";
 import { PackagesSkeleton } from "@/features/packages/components/PackagesSkeleton";
 import type { ListPackagesParams } from "@/features/packages/service";
 import type { PackageType } from "@/features/packages/schemas";
+
+export const metadata: Metadata = {
+  title: "Todos los paquetes",
+  description:
+    "Catálogo completo de paquetes de viaje nacionales e internacionales. Buscá por destino, mes de salida o tipo de viaje.",
+  alternates: { canonical: "/paquetes" },
+};
 
 interface PaquetesPageProps {
   searchParams?: Promise<{
@@ -49,21 +58,27 @@ export default async function PaquetesPage({ searchParams }: PaquetesPageProps) 
       {/* Back button */}
       <Link
         href="/#packages"
-        className="inline-flex w-fit items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        className="inline-flex w-fit items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-gold"
       >
-        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="15 18 9 12 15 6" />
         </svg>
         Volver al inicio
       </Link>
 
       {/* Header */}
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Todos los paquetes</h1>
-        <p className="text-muted-foreground">
+      <Reveal className="space-y-3" y={24}>
+        <p className="flex items-center gap-4 text-[0.65rem] font-semibold uppercase tracking-[0.32em] text-gold">
+          Catálogo completo
+          <span className="h-px w-10 bg-gold/50" aria-hidden />
+        </p>
+        <h1 className="font-display text-4xl tracking-tight sm:text-5xl">
+          Todos los <em className="italic text-accent">paquetes</em>
+        </h1>
+        <p className="max-w-xl leading-relaxed text-muted">
           Explorá nuestro catálogo completo de destinos y encontrá tu próximo viaje.
         </p>
-      </div>
+      </Reveal>
 
       <PackagesFilter title={title} month={month} type={type} basePath="/paquetes" />
 

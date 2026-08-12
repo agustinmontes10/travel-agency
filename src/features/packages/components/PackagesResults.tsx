@@ -37,19 +37,25 @@ export async function PackagesResults({ filters, hasActiveFilters }: PackagesRes
   const displayed = packages.slice(0, PREVIEW_COUNT_DESKTOP);
   const hasMore = packages.length > PREVIEW_COUNT_DESKTOP;
 
+  const params = new URLSearchParams();
+  if (filters.title) params.set("title", filters.title);
+  if (filters.month) params.set("month", String(filters.month));
+  if (filters.type) params.set("type", filters.type);
+  const query = params.toString();
+
   return (
     <div className="space-y-8">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {displayed.map((pkg, i) => (
           <div key={pkg.id} className={i >= PREVIEW_COUNT_MOBILE ? "hidden sm:block" : undefined}>
-            <PackageCard pkg={pkg} />
+            <PackageCard pkg={pkg} index={i} />
           </div>
         ))}
       </div>
       {hasMore && (
         <div className="flex justify-center pt-2">
           <Link
-            href="/paquetes"
+            href={query ? `/paquetes?${query}` : "/paquetes"}
             className={cn(
               "group inline-flex items-center justify-center gap-2.5 rounded-full font-semibold tracking-tight transition-all duration-200",
               "bg-accent text-accent-foreground shadow-soft hover:bg-accent/90 hover:shadow-lg hover:-translate-y-px",

@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
+    // Calidades permitidas: 20 para los fondos desenfocados, 75 default
+    qualities: [20, 75],
     remotePatterns: [
       ...(supabaseHostname
         ? [

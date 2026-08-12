@@ -62,8 +62,8 @@ export async function PackagesPageResults({
       </p>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {packages.map((pkg) => (
-          <PackageCard key={pkg.id} pkg={pkg} />
+        {packages.map((pkg, i) => (
+          <PackageCard key={pkg.id} pkg={pkg} index={i} />
         ))}
       </div>
 

@@ -8,7 +8,11 @@
       "Bash(cd \"C:/workspacePersonal/travel-agency\" && npx tsc --noEmit 2>&1)",
       "Bash(cd \"C:/workspacePersonal/travel-agency\" && npm install swiper 2>&1)",
       "Bash(cd \"C:/workspacePersonal/travel-agency\" && npx vercel --prod 2>&1)",
-      "Bash(cd C:/workspacePersonal/travel-agency && npm install @vercel/analytics)"
+      "Bash(cd C:/workspacePersonal/travel-agency && npm install @vercel/analytics)",
+      "PowerShell(npm run *)",
+      "Skill(run)",
+      "PowerShell(npm i *)",
+      "Bash(git add *)"
     ]
   }
 }

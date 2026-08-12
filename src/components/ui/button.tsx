@@ -12,9 +12,9 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-accent text-accent-foreground shadow-soft hover:bg-accent/90 focus-visible:ring-accent",
+    "bg-accent text-accent-foreground shadow-soft hover:bg-navy-deep hover:-translate-y-px focus-visible:ring-accent",
   secondary:
-    "bg-surface text-foreground border border-border-subtle hover:bg-surface-muted focus-visible:ring-accent",
+    "bg-surface text-foreground border border-border-subtle hover:border-gold/50 hover:bg-surface-muted focus-visible:ring-accent",
   ghost:
     "bg-transparent text-foreground hover:bg-accent-soft focus-visible:ring-accent",
 };
@@ -37,7 +37,7 @@ export function Button({
     <button
       type={type}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-tight transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:cursor-not-allowed disabled:opacity-60",
+        "inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-tight transition-all duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:cursor-not-allowed disabled:opacity-60",
         variantClasses[variant],
         sizeClasses[size],
         fullWidth && "w-full",

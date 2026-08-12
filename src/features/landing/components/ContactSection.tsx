@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui";
 import Image from "next/image";
+import { track } from "@vercel/analytics";
+import { DrawnRule, Reveal } from "@/components/ui";
 
 const WHATSAPP_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE;
 const WHATSAPP_DEFAULT_MESSAGE =
@@ -14,117 +17,149 @@ export function buildWhatsAppUrl() {
   return `https://wa.me/${WHATSAPP_PHONE}?text=${encodedMessage}`;
 }
 
+const InstagramIcon = () => (
+  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
+const WhatsAppIcon = () => (
+  <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+  </svg>
+);
+
+const MailIcon = () => (
+  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="4" width="20" height="16" rx="3" />
+    <path d="m22 7-10 6L2 7" />
+  </svg>
+);
+
+const SOCIAL_LINKS = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/mtturismochaves/",
+    icon: <InstagramIcon />,
+    external: true,
+  },
+  {
+    label: "WhatsApp",
+    href: buildWhatsAppUrl(),
+    icon: <WhatsAppIcon />,
+    external: true,
+  },
+  {
+    label: "Email",
+    href: "mailto:iaramenendezt@gmail.com",
+    icon: <MailIcon />,
+    external: false,
+  },
+];
+
 export function ContactSection() {
   const whatsappUrl = buildWhatsAppUrl();
 
   return (
-    <section id="contact" className="relative pb-80 md:pb-60">
+    <footer
+      id="contact"
+      className="relative left-1/2 right-1/2 -mx-[50vw] w-screen max-w-none bg-navy-deep text-white/70"
+    >
+      {/* Filete dorado superior: se dibuja desde el centro al entrar */}
+      <DrawnRule
+        className="w-full bg-gradient-to-r from-transparent via-gold/60 to-transparent"
+        origin="center"
+      />
 
-      <div className="relative z-10">
-        <div className="gap-2 md:flex md:flex-row md:items-center md:justify-between">
-          <div className="space-y-2">
-            <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted-foreground">
-              Contacto
-            </p>
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+        <Reveal className="gap-8 md:flex md:items-start md:justify-between" y={28} amount={0.15}>
+          <div className="max-w-xl space-y-4">
             <Image
-              src="/Logo2.png"
+              src="/LogoBlanco.png"
               alt="mt turismo Gonzales Chaves"
               width={180}
               height={48}
-              priority
               className="h-10 w-auto sm:h-12"
             />
-            <CardDescription className="max-w-xl">
-              Te ayudamos a encontrar el viaje ideal con asesoramiento personalizado y las mejores opciones del mercado.
-            </CardDescription>
+            <p className="font-display text-2xl italic leading-snug text-white sm:text-3xl">
+              Tu próximo viaje empieza con una conversación.
+            </p>
+            <p className="text-sm leading-relaxed">
+              Te ayudamos a encontrar el viaje ideal con asesoramiento
+              personalizado y las mejores opciones del mercado.
+            </p>
           </div>
-          <div className="mt-4 flex flex-col gap-3 md:mt-0 md:items-end">
-            <Link href={whatsappUrl} target="_blank">
-              <Button size="lg" className="px-6">
-                Escribir por WhatsApp
-              </Button>
+
+          <div className="mt-8 md:mt-0 md:shrink-0">
+            <Link
+              href={whatsappUrl}
+              target="_blank"
+              onClick={() => track("whatsapp_click", { source: "footer" })}
+              className="inline-flex h-12 items-center justify-center rounded-full bg-gold px-8 text-sm font-semibold tracking-tight text-navy-deep shadow-lg shadow-black/30 transition-all duration-200 hover:-translate-y-0.5 hover:bg-sand"
+            >
+              Escribir por WhatsApp
             </Link>
           </div>
-        </div>
-        <div className="mt-3 grid gap-4 text-md text-muted-foreground sm:grid-cols-4">
-          <div>
-            <p className="font-medium text-foreground">Horarios de atención</p>
+        </Reveal>
+
+        <Reveal
+          className="mt-12 grid gap-8 border-t border-white/10 pt-10 text-sm sm:grid-cols-3"
+          y={24}
+          delay={0.15}
+          amount={0.15}
+        >
+          <div className="space-y-2">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-sand">
+              Horarios de atención
+            </p>
             <p>Lunes a viernes de 9 a 18 hs.</p>
           </div>
-          <div className="col-span-2">
-            <p className="font-medium text-foreground">Ubicación</p>
+          <div className="space-y-2">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-sand">
+              Ubicación
+            </p>
             <p>Sarmiento 235, Adolfo Gonzales Chaves, Buenos Aires.</p>
           </div>
-          <div>
-            <p className="font-medium text-foreground">Redes</p>
+          <div className="space-y-3">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-sand">
+              Redes
+            </p>
             <div className="flex gap-3">
-              <Link href={'https://www.instagram.com/mtturismochaves/'} target="_blank"> 
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 102 102" id="instagram">
-                  <defs>
-                    <radialGradient id="a" cx="6.601" cy="99.766" r="129.502" gradientUnits="userSpaceOnUse">
-                      <stop offset=".09" stop-color="#fa8f21"></stop>
-                      <stop offset=".78" stop-color="#d82d7e"></stop>
-                    </radialGradient>
-                    <radialGradient id="b" cx="70.652" cy="96.49" r="113.963" gradientUnits="userSpaceOnUse">
-                      <stop offset=".64" stop-color="#8c3aaa" stop-opacity="0"></stop>
-                      <stop offset="1" stop-color="#8c3aaa"></stop>
-                    </radialGradient>
-                  </defs>
-                  <path fill="url(#a)" d="M25.865,101.639A34.341,34.341,0,0,1,14.312,99.5a19.329,19.329,0,0,1-7.154-4.653A19.181,19.181,0,0,1,2.5,87.694,34.341,34.341,0,0,1,.364,76.142C.061,69.584,0,67.617,0,51s.067-18.577.361-25.14A34.534,34.534,0,0,1,2.5,14.312,19.4,19.4,0,0,1,7.154,7.154,19.206,19.206,0,0,1,14.309,2.5,34.341,34.341,0,0,1,25.862.361C32.422.061,34.392,0,51,0s18.577.067,25.14.361A34.534,34.534,0,0,1,87.691,2.5a19.254,19.254,0,0,1,7.154,4.653A19.267,19.267,0,0,1,99.5,14.309a34.341,34.341,0,0,1,2.14,11.553c.3,6.563.361,8.528.361,25.14s-.061,18.577-.361,25.14A34.5,34.5,0,0,1,99.5,87.694,20.6,20.6,0,0,1,87.691,99.5a34.342,34.342,0,0,1-11.553,2.14c-6.557.3-8.528.361-25.14.361s-18.577-.058-25.134-.361"></path>
-                  <path fill="url(#b)" d="M25.865,101.639A34.341,34.341,0,0,1,14.312,99.5a19.329,19.329,0,0,1-7.154-4.653A19.181,19.181,0,0,1,2.5,87.694,34.341,34.341,0,0,1,.364,76.142C.061,69.584,0,67.617,0,51s.067-18.577.361-25.14A34.534,34.534,0,0,1,2.5,14.312,19.4,19.4,0,0,1,7.154,7.154,19.206,19.206,0,0,1,14.309,2.5,34.341,34.341,0,0,1,25.862.361C32.422.061,34.392,0,51,0s18.577.067,25.14.361A34.534,34.534,0,0,1,87.691,2.5a19.254,19.254,0,0,1,7.154,4.653A19.267,19.267,0,0,1,99.5,14.309a34.341,34.341,0,0,1,2.14,11.553c.3,6.563.361,8.528.361,25.14s-.061,18.577-.361,25.14A34.5,34.5,0,0,1,99.5,87.694,20.6,20.6,0,0,1,87.691,99.5a34.342,34.342,0,0,1-11.553,2.14c-6.557.3-8.528.361-25.14.361s-18.577-.058-25.134-.361"></path>
-                  <path fill="#fff" d="M461.114,477.413a12.631,12.631,0,1,1,12.629,12.632,12.631,12.631,0,0,1-12.629-12.632m-6.829,0a19.458,19.458,0,1,0,19.458-19.458,19.457,19.457,0,0,0-19.458,19.458m35.139-20.229a4.547,4.547,0,1,0,4.549-4.545h0a4.549,4.549,0,0,0-4.547,4.545m-30.99,51.074a20.943,20.943,0,0,1-7.037-1.3,12.547,12.547,0,0,1-7.193-7.19,20.923,20.923,0,0,1-1.3-7.037c-.184-3.994-.22-5.194-.22-15.313s.04-11.316.22-15.314a21.082,21.082,0,0,1,1.3-7.037,12.54,12.54,0,0,1,7.193-7.193,20.924,20.924,0,0,1,7.037-1.3c3.994-.184,5.194-.22,15.309-.22s11.316.039,15.314.221a21.082,21.082,0,0,1,7.037,1.3,12.541,12.541,0,0,1,7.193,7.193,20.926,20.926,0,0,1,1.3,7.037c.184,4,.22,5.194.22,15.314s-.037,11.316-.22,15.314a21.023,21.023,0,0,1-1.3,7.037,12.547,12.547,0,0,1-7.193,7.19,20.925,20.925,0,0,1-7.037,1.3c-3.994.184-5.194.22-15.314.22s-11.316-.037-15.309-.22m-.314-68.509a27.786,27.786,0,0,0-9.2,1.76,19.373,19.373,0,0,0-11.083,11.083,27.794,27.794,0,0,0-1.76,9.2c-.187,4.04-.229,5.332-.229,15.623s.043,11.582.229,15.623a27.793,27.793,0,0,0,1.76,9.2,19.374,19.374,0,0,0,11.083,11.083,27.813,27.813,0,0,0,9.2,1.76c4.042.184,5.332.229,15.623.229s11.582-.043,15.623-.229a27.8,27.8,0,0,0,9.2-1.76,19.374,19.374,0,0,0,11.083-11.083,27.716,27.716,0,0,0,1.76-9.2c.184-4.043.226-5.332.226-15.623s-.043-11.582-.226-15.623a27.786,27.786,0,0,0-1.76-9.2,19.379,19.379,0,0,0-11.08-11.083,27.748,27.748,0,0,0-9.2-1.76c-4.041-.185-5.332-.229-15.621-.229s-11.583.043-15.626.229" transform="translate(-422.637 -426.196)"></path>
-                </svg>
-              </Link>
-
-              <Link href={whatsappUrl} target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" id="whatsapp" width="35" height="35" x="0" y="0" version="1.1" viewBox="0 0 100 100">
-                  <g id="Graphics-_x2F_-App-Icons-_x2F_-WhatsApp">
-                    <g id="Icon_6_">
-                      <linearGradient id="Background_13_" x1="50.723" x2="50.723" y1="627.233" y2="625.746" gradientTransform="matrix(60 0 0 -60 -2993 37639)" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stop-color="#62FA7F"></stop>
-                        <stop offset=".686" stop-color="#22CC40"></stop>
-                        <stop offset="1" stop-color="#05B723"></stop>
-                      </linearGradient>
-                      <path id="Background_7_" fill="url(#Background_13_)" d="M28.4 5H26c-2 .1-4.6.2-5.7.5-1.8.4-3.5.9-4.9 1.6-1.6.8-3.1 1.9-4.4 3.2-1.3 1.3-2.3 2.7-3.2 4.4-.7 1.4-1.3 3.1-1.6 4.8-.2 1.2-.4 3.8-.5 5.8V74c.1 2 .2 4.6.5 5.7.4 1.8.9 3.5 1.6 4.9.8 1.6 1.9 3.1 3.2 4.4 1.3 1.3 2.7 2.3 4.4 3.2 1.4.7 3.1 1.3 4.8 1.6 1.2.2 3.8.4 5.8.5h48.7c2-.1 4.6-.2 5.7-.5 1.8-.4 3.5-.9 4.9-1.6 1.6-.8 3.1-1.9 4.4-3.2 1.3-1.3 2.3-2.7 3.2-4.4.7-1.4 1.3-3.1 1.6-4.8.2-1.2.4-3.8.5-5.8V25.3c-.1-2-.2-4.6-.5-5.7-.4-1.8-.9-3.5-1.6-4.9-.8-1.6-1.9-3.1-3.2-4.4C88.4 9 87 8 85.3 7.1c-1.4-.7-3.1-1.3-4.8-1.6-1.2-.2-3.8-.4-5.8-.5H28.4z" style={{ fill: 'url(#Background_13_)' }}></path>
-                      <path id="WhatsApp-Icon" fill="#FFF" d="M66.6 54.4c-.8-.4-4.8-2.3-5.5-2.6-.7-.3-1.3-.4-1.8.4s-2.1 2.6-2.5 3.1c-.5.5-.9.6-1.7.2-.8-.4-3.4-1.2-6.5-3.9-2.4-2.1-4-4.7-4.5-5.5-.5-.8 0-1.2.4-1.6.4-.4.8-.9 1.2-1.4.4-.5.5-.8.8-1.3.3-.5.1-1-.1-1.4-.2-.4-1.8-4.3-2.5-5.9-.7-1.5-1.3-1.3-1.8-1.4h-1.5c-.5 0-1.4.2-2.1 1-.7.8-2.8 2.7-2.8 6.6 0 3.9 2.9 7.6 3.3 8.2.4.5 5.7 8.5 13.7 11.9 1.9.8 3.4 1.3 4.6 1.7 1.9.6 3.7.5 5.1.3 1.5-.2 4.8-1.9 5.4-3.7.7-1.8.7-3.4.5-3.7-.4-.4-.9-.6-1.7-1M51.3 75c-4.8 0-9.4-1.3-13.5-3.7l-1-.6-10 2.6 2.7-9.7-.6-1c-2.6-4.2-4-9-4-14 0-14.5 11.9-26.3 26.5-26.3C58.3 22.3 65 25 70 30c5 5 7.7 11.6 7.7 18.6C77.7 63.1 65.8 75 51.3 75m22.5-48.8c-6-6-14-9.3-22.5-9.3-17.5 0-31.8 14.2-31.8 31.7 0 5.6 1.5 11 4.2 15.8l-4.5 16.4L36 76.4c4.6 2.5 9.9 3.9 15.2 3.9C68.7 80.3 83 66.1 83 48.6c.1-8.4-3.2-16.4-9.2-22.4" style={{ fill: '#fff' }}></path>
-                    </g>
-                  </g>
-                </svg>
-              </Link>
-
-              <Link href={"mailto:iaramenendezt@gmail.com"}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38.51 38.51" id="gmail" width="35" height="35">
-                  <g>
-                    <g>
-                      <rect width="38.51" height="38.51" fill="#f2f2f2" rx="6.97" ry="6.97"></rect>
-                      <path fill="#c6c6c6" d="M38.51,31.54v-12.88c-2.6-2.6-5.19-5.2-7.79-7.79-.82-.82-2.19-1.06-3.26-.25l-1.55,1.16-6.65,4.99-6.65-4.99-1.55-1.16c-1.65-1.23-3.99-.06-3.99,1.99v14.13c0,.5.22.94.57,1.24,3.51,3.51,7.02,7.02,10.53,10.53h13.38c3.83,0,6.97-3.14,6.97-6.97Z"></path>
-                      <g>
-                        <path fill="#4285f4" d="M8.72,28.4h3.88v-9.42l-5.54-4.16v11.91c0,.92.75,1.66,1.66,1.66"></path>
-                        <path fill="#34a853" d="M25.9,28.4h3.88c.92,0,1.66-.75,1.66-1.66v-11.91l-5.54,4.16"></path>
-                        <path fill="#fbbc04" d="M25.9,11.77v7.2l5.54-4.16v-2.22c0-2.06-2.35-3.23-3.99-1.99"></path>
-                        <path fill="#ea4335" d="M12.6,18.98v-7.2l6.65,4.99,6.65-4.99v7.2l-6.65,4.99"></path>
-                        <path fill="#c5221f" d="M7.06,12.61v2.22l5.54,4.16v-7.2l-1.55-1.16c-1.65-1.23-3.99-.06-3.99,1.99"></path>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-              </Link>
+              {SOCIAL_LINKS.map(({ label, href, icon, external }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  target={external ? "_blank" : undefined}
+                  aria-label={label}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 transition-all duration-200 hover:border-gold/70 hover:text-sand hover:-translate-y-0.5"
+                >
+                  {icon}
+                </Link>
+              ))}
             </div>
           </div>
-        </div>
+        </Reveal>
 
-        <a href="https://rocketly.com.ar" target="_blank">
-          <div className="mt-3 gap-4 text-md text-muted-foreground flex items-center">
-            © {new Date().getFullYear()} Hecho por Rocketly
-            <svg width="40" height="40" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-md text-white/50 sm:flex-row sm:items-center">
+          <p>
+            © {new Date().getFullYear()} MT Turismo · Adolfo Gonzales Chaves
+          </p>
+          <a
+            href="https://neexia.com.ar"
+            target="_blank"
+            className="inline-flex items-center gap-2 transition-colors hover:text-sand"
+          >
+            Hecho por Neexia
+            {/* <svg width="24" height="24" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="200" cy="200" r="200" fill="black" />
               <g filter="url(#filter0_d_54_25)">
                 <path d="M169.574 258.985C164.375 274.58 151.872 286.075 133.414 292.228C124.983 295.022 116.189 296.568 107.31 296.816C106.216 296.816 105.167 296.381 104.393 295.608C103.619 294.834 103.184 293.784 103.184 292.69C103.433 283.812 104.978 275.017 107.773 266.587C113.925 248.129 125.421 235.624 141.016 230.426C141.53 230.254 142.073 230.185 142.614 230.223C143.155 230.261 143.683 230.405 144.168 230.648C144.653 230.89 145.086 231.225 145.441 231.635C145.797 232.044 146.068 232.52 146.239 233.034C146.411 233.549 146.479 234.092 146.44 234.633C146.402 235.174 146.257 235.702 146.014 236.186C145.771 236.671 145.435 237.104 145.025 237.458C144.615 237.813 144.139 238.084 143.625 238.255C117.93 246.82 112.743 276.928 111.698 288.302C123.069 287.259 153.18 282.072 161.745 256.376C162.092 255.339 162.837 254.482 163.815 253.994C164.793 253.505 165.925 253.425 166.963 253.771C168 254.117 168.858 254.86 169.347 255.838C169.837 256.815 169.918 257.947 169.574 258.985ZM273.606 178.908L263.145 189.369V254.262C263.149 255.888 262.831 257.499 262.209 259.001C261.587 260.503 260.673 261.867 259.521 263.014L226.159 296.375C224.575 297.959 222.591 299.083 220.418 299.628C218.245 300.173 215.965 300.118 213.82 299.469C211.676 298.82 209.748 297.601 208.243 295.942C206.737 294.283 205.709 292.247 205.27 290.05L196.869 248.045L151.956 203.132L109.951 194.73C107.754 194.291 105.718 193.264 104.059 191.758C102.4 190.252 101.181 188.325 100.531 186.18C99.8819 184.036 99.8268 181.756 100.372 179.582C100.917 177.409 102.041 175.425 103.626 173.841L136.986 140.481C138.132 139.328 139.496 138.414 140.999 137.791C142.501 137.169 144.112 136.851 145.738 136.855H210.63L221.092 126.393C249.252 98.233 277.93 99.0177 288.952 100.663C291.571 101.043 293.997 102.259 295.869 104.13C297.741 106.002 298.957 108.428 299.337 111.047C300.982 122.07 301.767 150.747 273.606 178.908ZM111.569 186.639L152.634 194.852L202.379 145.107H145.738C145.196 145.106 144.659 145.212 144.158 145.419C143.657 145.627 143.202 145.932 142.82 146.316L109.46 179.676C108.932 180.204 108.557 180.865 108.376 181.59C108.195 182.314 108.213 183.074 108.429 183.789C108.646 184.503 109.052 185.146 109.605 185.648C110.158 186.15 110.837 186.492 111.569 186.639ZM254.893 197.621L205.148 247.367L213.361 288.431C213.507 289.163 213.85 289.842 214.352 290.395C214.854 290.948 215.497 291.355 216.211 291.571C216.926 291.787 217.687 291.806 218.411 291.624C219.135 291.442 219.797 291.068 220.325 290.539L253.685 257.179C254.069 256.797 254.374 256.342 254.581 255.842C254.788 255.341 254.894 254.804 254.893 254.262L254.893 197.621ZM267.771 173.073C293.278 147.566 292.636 122.051 291.176 112.266C291.05 111.398 290.647 110.594 290.027 109.974C289.407 109.354 288.603 108.95 287.735 108.824C277.947 107.364 252.433 106.722 226.926 132.229L215.257 143.897L215.256 143.899L159.825 199.331L200.67 240.176L256.101 184.744L256.102 184.743L267.771 173.073Z" fill="url(#paint0_linear_54_25)" />
-                <path d="M220.738 126.04C249.043 97.7356 277.898 98.5074 289.025 100.168H289.024C291.75 100.564 294.275 101.829 296.223 103.776C298.17 105.724 299.436 108.248 299.832 110.974L299.984 112.067C301.513 123.904 301.38 151.84 273.959 179.262L263.645 189.576V254.261C263.649 255.953 263.318 257.629 262.671 259.192C262.024 260.755 261.072 262.174 259.873 263.367L259.874 263.368L226.513 296.729C224.865 298.376 222.8 299.546 220.539 300.113C218.278 300.68 215.906 300.623 213.676 299.947C211.445 299.272 209.439 298.004 207.872 296.278C206.305 294.553 205.236 292.434 204.779 290.148L196.408 248.291L151.709 203.592L109.854 195.221C107.568 194.764 105.449 193.695 103.723 192.129C101.997 190.562 100.728 188.556 100.053 186.325C99.3772 184.094 99.3198 181.722 99.8867 179.461C100.454 177.2 101.624 175.135 103.272 173.487L136.632 140.127C137.825 138.928 139.245 137.977 140.808 137.329C142.371 136.682 144.047 136.351 145.738 136.355H210.423L220.738 126.04ZM142.649 229.725C143.256 229.767 143.848 229.929 144.392 230.2C144.936 230.472 145.421 230.848 145.819 231.308C146.218 231.767 146.522 232.3 146.714 232.876C146.906 233.453 146.983 234.063 146.939 234.669C146.896 235.275 146.733 235.867 146.461 236.41C146.189 236.954 145.812 237.438 145.353 237.836C144.893 238.234 144.359 238.538 143.782 238.729L143.781 238.729C131.108 242.954 123.474 252.493 118.871 262.435C114.425 272.037 112.828 281.975 112.255 287.744C118.022 287.172 127.96 285.576 137.563 281.13C147.505 276.527 157.046 268.893 161.271 256.218L161.271 256.217C161.661 255.054 162.495 254.093 163.592 253.546C164.689 252.998 165.958 252.909 167.121 253.297C168.284 253.685 169.245 254.518 169.794 255.613C170.343 256.709 170.435 257.979 170.049 259.143L170.048 259.144C164.872 274.67 152.541 286.147 134.438 292.408L133.571 292.702C125.094 295.512 116.251 297.066 107.324 297.315L107.311 297.316C106.084 297.316 104.907 296.828 104.039 295.961C103.172 295.094 102.685 293.917 102.685 292.69V292.676C102.934 283.749 104.488 274.907 107.298 266.43V266.429C113.49 247.853 125.085 235.21 140.857 229.952L141.075 229.885C141.586 229.741 142.119 229.687 142.649 229.725ZM205.69 247.531L213.851 288.333L213.907 288.572C214.057 289.124 214.336 289.634 214.722 290.06C215.163 290.546 215.728 290.903 216.356 291.093C216.985 291.283 217.652 291.298 218.289 291.139C218.926 290.979 219.508 290.65 219.972 290.186L253.332 256.826V256.825C253.669 256.49 253.937 256.09 254.119 255.65C254.301 255.211 254.394 254.739 254.393 254.264V198.828L205.69 247.531ZM287.661 109.318C277.982 107.875 252.644 107.217 227.279 132.582L215.624 144.237L215.617 144.245L215.609 144.253L160.531 199.33L200.669 239.468L255.747 184.391L267.418 172.72C292.783 147.354 292.125 122.016 290.682 112.34V112.338C290.571 111.577 290.217 110.871 289.673 110.327C289.129 109.783 288.424 109.429 287.663 109.318H287.661ZM145.736 145.607C145.261 145.606 144.789 145.699 144.35 145.881C143.91 146.063 143.511 146.331 143.175 146.669L143.174 146.67L109.813 180.029C109.35 180.493 109.021 181.075 108.861 181.711C108.702 182.347 108.718 183.016 108.908 183.644C109.098 184.272 109.456 184.836 109.941 185.277C110.427 185.718 111.024 186.02 111.667 186.148L152.469 194.309L201.172 145.607H145.736Z" stroke="url(#paint1_linear_54_25)" />
               </g>
               <defs>
-                <filter id="filter0_d_54_25" x="99" y="99.0005" width="209" height="206.999" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <filter id="filter0_d_54_25" x="99" y="99.0005" width="209" height="206.999" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                  <feFlood floodOpacity="0" result="BackgroundImageFix" />
                   <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
                   <feOffset dx="5" dy="3" />
                   <feGaussianBlur stdDeviation="1" />
@@ -134,29 +169,60 @@ export function ContactSection() {
                   <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_54_25" result="shape" />
                 </filter>
                 <linearGradient id="paint0_linear_54_25" x1="291" y1="113" x2="172" y2="300" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#00D4E7" />
-                  <stop offset="1" stop-color="#00BE77" />
-                </linearGradient>
-                <linearGradient id="paint1_linear_54_25" x1="200" y1="100" x2="200" y2="300" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#00D4E7" />
-                  <stop offset="1" stop-color="#00BE77" />
+                  <stop stopColor="#00D4E7" />
+                  <stop offset="1" stopColor="#00BE77" />
                 </linearGradient>
               </defs>
+            </svg> */}
+            <svg width="26" height="26" viewBox="0 0 398 423" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g filter="url(#filter0_d_26_15)">
+                <path d="M345.821 0.0169219C344.238 0.0635432 342.657 0.143521 341.077 0.254524C312.533 5.67814 304.228 22.8791 300.081 49.1447C279.647 64.4143 256.839 79.2065 240.539 98.6965C214.571 129.746 196.191 167.925 176.779 202.373C155.388 240.334 105.668 303.193 68.8193 325.649C-16.8951 305.355 -9.95969 417.329 52.2198 412.511C64.1571 411.443 73.9143 409.285 82.2107 399.788C87.1326 394.158 92.1232 381.199 97.0606 376.91C124.15 353.373 149.268 331.978 171.579 303.404C210.464 253.606 231.07 192.574 270.803 143.426C282.762 128.772 315.908 99.3403 332.258 89.7585C359.119 91.2393 383.933 87.5296 391.319 56.0891C398.077 27.3215 376.038 -0.788961 345.821 0.0169219Z" fill="#FF8336" />
+              </g>
+              <path d="M101.17 39.6767C95.815 13.5643 70.2755 -3.2349 44.1786 2.18649C18.1795 7.5879 1.45345 33.012 6.78826 59.0267C12.1208 85.0414 37.5029 101.834 63.5309 96.568C89.6543 91.282 106.522 65.7868 101.17 39.6767Z" fill="#F1F1F1" />
+              <g filter="url(#filter1_d_26_15)">
+                <path d="M236.37 216.768C233.759 219.299 233.129 221.559 231.703 224.894C224.537 239.406 213.252 258.061 205.016 272.17C222.455 291.02 234.41 308.887 255.107 326.783C266.838 336.925 281.257 347.241 291.769 356.97L292.864 357.991C298.889 339.145 305.785 324.392 325.101 315.723C289.942 289.675 267 259.524 242.99 223.797C240.364 220.172 239.753 217.834 236.37 216.768Z" fill="#FF8336" />
+              </g>
+              <g filter="url(#filter2_d_26_15)">
+                <path d="M190.752 151.022C165.361 114.788 151.514 89.9569 110.925 66.0002C105.537 84.2403 94.9314 96.0754 78.4496 105.213C106.98 127.054 142.989 171.711 162.739 202.454L164.424 202.57C171.71 189.074 185.694 164.737 190.752 151.022Z" fill="#FF8336" />
+              </g>
+              <path d="M381.42 337.267C370.428 325.185 353.778 319.968 337.858 323.615C313.777 329.13 298.576 352.947 303.711 377.112C308.846 401.278 332.416 416.853 356.661 412.103C372.688 408.961 385.778 397.423 390.906 381.919C396.036 366.411 392.411 349.346 381.42 337.267Z" fill="#F1F1F1" />
+              <defs>
+                <filter id="filter0_d_26_15" x="0" y="0" width="397.544" height="422.662" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                  <feOffset dy="5" />
+                  <feGaussianBlur stdDeviation="2.5" />
+                  <feComposite in2="hardAlpha" operator="out" />
+                  <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_26_15" />
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_26_15" result="shape" />
+                </filter>
+                <filter id="filter1_d_26_15" x="200.016" y="216.768" width="130.085" height="151.223" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                  <feOffset dy="5" />
+                  <feGaussianBlur stdDeviation="2.5" />
+                  <feComposite in2="hardAlpha" operator="out" />
+                  <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_26_15" />
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_26_15" result="shape" />
+                </filter>
+                <filter id="filter2_d_26_15" x="73.4496" y="66.0002" width="122.302" height="146.569" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                  <feOffset dy="5" />
+                  <feGaussianBlur stdDeviation="2.5" />
+                  <feComposite in2="hardAlpha" operator="out" />
+                  <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_26_15" />
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_26_15" result="shape" />
+                </filter>
+              </defs>
             </svg>
-          </div>
-        </a>
 
+          </a>
+        </div>
       </div>
-
-      <Image
-        src="/Footer.jpg"
-        alt="Destinos icónicos alrededor del mundo"
-        width={1920}
-        height={400}
-        priority
-        className="absolute bottom-0 min-w-screen h-80 object-cover w-screen max-w-none -mx-[50vw] left-1/2 right-1/2 object-top"
-      />
-    </section>
+    </footer>
   );
 }
-
