@@ -3,6 +3,7 @@
 import { useEffect, type ReactNode } from "react";
 import { MotionConfig } from "motion/react";
 import Lenis from "lenis";
+import { ScrollTrigger } from "@/lib/gsap";
 
 declare global {
   interface Window {
@@ -25,7 +26,11 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     });
     window.__lenis = lenis;
 
+    // Mantiene sincronizados los ScrollTriggers de GSAP con el scroll suavizado
+    lenis.on("scroll", ScrollTrigger.update);
+
     return () => {
+      lenis.off("scroll", ScrollTrigger.update);
       lenis.destroy();
       window.__lenis = undefined;
     };

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { DrawnRule, EASE_OUT } from "@/components/ui";
+import { DrawnRule, EASE_OUT, Reveal, SplitHeading } from "@/components/ui";
 
 const CompassIcon = () => (
   <svg className="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -54,28 +54,25 @@ const fadeUp = {
 export function ServicesSection() {
   return (
     <section id="services" className="space-y-12">
-      <motion.div
-        className="space-y-4 text-center"
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: EASE_OUT }}
-      >
-        <p className="flex items-center justify-center gap-4 text-[0.65rem] font-semibold uppercase tracking-[0.32em] text-gold">
-          <DrawnRule className="w-8 bg-gold/50" origin="right" delay={0.3} />
-          Por qué elegirnos
-          <DrawnRule className="w-8 bg-gold/50" origin="left" delay={0.3} />
-        </p>
-        <h2 className="font-display text-3xl tracking-tight text-balance sm:text-4xl">
+      <div className="space-y-4 text-center">
+        <Reveal duration={0.7} noBlur>
+          <p className="flex items-center justify-center gap-4 text-[0.65rem] font-semibold uppercase tracking-[0.32em] text-gold">
+            <DrawnRule className="w-8 bg-gold/50" origin="right" delay={0.3} />
+            Por qué elegirnos
+            <DrawnRule className="w-8 bg-gold/50" origin="left" delay={0.3} />
+          </p>
+        </Reveal>
+        <SplitHeading className="font-display text-3xl tracking-tight text-balance sm:text-4xl">
           Viajás tranquilo porque estás <em className="italic text-accent">en buenas manos</em>.
-        </h2>
-        <p className="mx-auto max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-          Años de experiencia organizando viajes nos enseñaron que los detalles
-          marcan la diferencia. Por eso nos ocupamos de todo, para que vos solo
-          te ocupes de disfrutar.
-        </p>
-      </motion.div>
+        </SplitHeading>
+        <Reveal duration={0.7} delay={0.25} y={20} noBlur>
+          <p className="mx-auto max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+            Años de experiencia organizando viajes nos enseñaron que los detalles
+            marcan la diferencia. Por eso nos ocupamos de todo, para que vos solo
+            te ocupes de disfrutar.
+          </p>
+        </Reveal>
+      </div>
 
       <div className="grid gap-x-10 gap-y-12 md:grid-cols-3">
         {services.map((service, i) => (

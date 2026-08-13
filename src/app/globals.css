@@ -77,7 +77,9 @@ body {
   color: var(--foreground);
   font-family: var(--font-hanken), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  overflow-x: hidden;
+  /* clip (no hidden): recorta el desborde sin crear un scroll container,
+     que rompería position: sticky en la galería horizontal */
+  overflow-x: clip;
 }
 
 /* Indicador de scroll del hero */
