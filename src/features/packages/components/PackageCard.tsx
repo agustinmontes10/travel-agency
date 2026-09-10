@@ -16,6 +16,11 @@ function formatMonths(months: number[]) {
   return [...months].sort((a, b) => a - b).map((m) => MONTH_NAMES[m]).join(" · ");
 }
 
+function formatPrice(price: number | null, currency: string | null) {
+  if (price == null || !currency) return null;
+  return `Desde ${currency} ${price.toLocaleString("es-AR")} p/persona`;
+}
+
 function buildWhatsAppUrl(packageTitle: string) {
   const phone = process.env.NEXT_PUBLIC_WHATSAPP_PHONE;
   if (!phone) return "#";
@@ -88,6 +93,9 @@ export function PackageCard({ pkg, index = 0 }: PackageCardProps) {
           <p className="font-display text-lg leading-snug tracking-tight text-foreground">{pkg.title}</p>
           {pkg.months.length > 0 && (
             <p className="mt-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-gold">{formatMonths(pkg.months)}</p>
+          )}
+          {formatPrice(pkg.price, pkg.currency) && (
+            <p className="mt-1 text-sm font-medium text-foreground">{formatPrice(pkg.price, pkg.currency)}</p>
           )}
 
           <Link

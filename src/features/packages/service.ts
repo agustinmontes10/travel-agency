@@ -1,11 +1,12 @@
 import * as repo from "./repository";
 import type { CreatePackageInput, UpdatePackageInput } from "./schemas";
-import type { PackageType } from "./schemas";
+import type { PackageType, Currency } from "./schemas";
 
 export interface ListPackagesParams {
   month?: number;
   type?: PackageType;
   title?: string;
+  available?: boolean;
 }
 
 export interface PublicPackage {
@@ -14,6 +15,9 @@ export interface PublicPackage {
   image: string;
   months: number[];
   type: PackageType;
+  price: number | null;
+  currency: Currency | null;
+  available: boolean;
   createdAt: Date;
 }
 

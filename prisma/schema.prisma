@@ -19,11 +19,19 @@ enum PackageType {
   INTERNACIONAL
 }
 
+enum Currency {
+  USD
+  ARS
+}
+
 model Package {
   id        String      @id @default(cuid())
   title     String
   image     String
   months    Int[]       @default([])
   type      PackageType @default(NACIONAL)
+  price     Int?
+  currency  Currency?
+  available Boolean     @default(true)
   createdAt DateTime    @default(now())
 }

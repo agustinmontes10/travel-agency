@@ -20,6 +20,9 @@ export async function createPackageAction(formData: FormData) {
     image: imageUrl,
     months: formData.getAll("months"),
     type: formData.get("type"),
+    price: formData.get("price"),
+    currency: formData.get("currency"),
+    available: formData.get("available") === "on",
   });
 
   await createPackage(parsed);
@@ -46,6 +49,9 @@ export async function updatePackageAction(id: string, formData: FormData) {
   const raw: Record<string, unknown> = {
     title: formData.get("title") || undefined,
     type: formData.get("type") || undefined,
+    price: formData.get("price") || undefined,
+    currency: formData.get("currency") || undefined,
+    available: formData.get("available") === "on",
     ...(monthsRaw.length > 0 && { months: monthsRaw }),
   };
   if (imageUrl) raw.image = imageUrl;

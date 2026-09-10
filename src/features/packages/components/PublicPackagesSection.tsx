@@ -13,7 +13,7 @@ interface PublicPackagesSectionProps {
 }
 
 function parseFilters(title?: string, month?: string, type?: string): ListPackagesParams {
-  const params: ListPackagesParams = {};
+  const params: ListPackagesParams = { available: true };
   if (title?.trim()) params.title = title.trim();
   if (month) {
     const m = parseInt(month, 10);

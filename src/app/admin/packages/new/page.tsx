@@ -75,6 +75,39 @@ export default function NewPackagePage() {
               </div>
             </div>
 
+            <div className="flex gap-4">
+              <div className="flex flex-1 flex-col gap-1.5">
+                <label htmlFor="price" className="text-sm font-medium">
+                  Precio (por persona) <span className="text-xs font-normal text-muted-foreground">(opcional)</span>
+                </label>
+                <Input id="price" name="price" type="number" min={1} step={1} placeholder="850" />
+              </div>
+
+              <div className="flex w-32 flex-col gap-1.5">
+                <label htmlFor="currency" className="text-sm font-medium">
+                  Moneda
+                </label>
+                <select
+                  id="currency"
+                  name="currency"
+                  defaultValue=""
+                  className="h-10 rounded-lg border border-border-subtle bg-surface px-3 text-sm"
+                >
+                  <option value="">Sin definir</option>
+                  <option value="USD">USD</option>
+                  <option value="ARS">ARS</option>
+                </select>
+              </div>
+            </div>
+            <p className="-mt-3 text-xs text-muted-foreground">
+              Dejá vacío si el precio ya está en la imagen del paquete.
+            </p>
+
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" name="available" defaultChecked className="accent-accent" />
+              <span className="text-sm font-medium">Disponible (visible en la web)</span>
+            </label>
+
             <div className="flex gap-3 pt-2">
               <Button type="submit" variant="primary" size="md">
                 Crear paquete

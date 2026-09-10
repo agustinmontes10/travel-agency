@@ -12,6 +12,11 @@ function formatMonths(months: number[]) {
   return [...months].sort((a, b) => a - b).map((m) => MONTH_NAMES[m]).join(" · ");
 }
 
+function formatPrice(price: number | null, currency: string | null) {
+  if (price == null || !currency) return null;
+  return `Desde ${currency} ${price.toLocaleString("es-AR")} p/persona`;
+}
+
 interface PackageModalProps {
   pkg: PublicPackage;
   onClose: () => void;
@@ -97,6 +102,9 @@ export function PackageModal({ pkg, onClose }: PackageModalProps) {
             <p className="font-display text-xl leading-snug tracking-tight">{pkg.title}</p>
             {pkg.months.length > 0 && (
               <p className="mt-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-sand">{formatMonths(pkg.months)}</p>
+            )}
+            {formatPrice(pkg.price, pkg.currency) && (
+              <p className="mt-1 text-sm font-medium text-white/90">{formatPrice(pkg.price, pkg.currency)}</p>
             )}
           </div>
         </div>

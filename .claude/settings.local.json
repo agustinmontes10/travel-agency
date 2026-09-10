@@ -12,7 +12,8 @@
       "PowerShell(npm run *)",
       "Skill(run)",
       "PowerShell(npm i *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "PowerShell(git push *)"
     ]
   }
 }

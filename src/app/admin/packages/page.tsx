@@ -12,6 +12,11 @@ function formatMonths(months: number[]) {
   return [...months].sort((a, b) => a - b).map((m) => MONTH_NAMES[m]).join(", ");
 }
 
+function formatPrice(price: number | null, currency: string | null) {
+  if (price == null || !currency) return "—";
+  return `${currency} ${price.toLocaleString("es-AR")}`;
+}
+
 export default async function AdminPackagesPage() {
   const packages = await listPackages();
 
@@ -43,6 +48,8 @@ export default async function AdminPackagesPage() {
                 <th className="px-4 py-3 font-medium text-muted-foreground">Título</th>
                 <th className="px-4 py-3 font-medium text-muted-foreground">Tipo</th>
                 <th className="px-4 py-3 font-medium text-muted-foreground">Meses</th>
+                <th className="px-4 py-3 font-medium text-muted-foreground">Precio</th>
+                <th className="px-4 py-3 font-medium text-muted-foreground">Estado</th>
                 <th className="px-4 py-3 font-medium text-muted-foreground">Acciones</th>
               </tr>
             </thead>
@@ -71,6 +78,16 @@ export default async function AdminPackagesPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">{formatMonths(pkg.months)}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{formatPrice(pkg.price, pkg.currency)}</td>
+                  <td className="px-4 py-3">
+                    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                      pkg.available
+                        ? "bg-emerald-50 text-emerald-700"
+                        : "bg-gray-100 text-gray-500"
+                    }`}>
+                      {pkg.available ? "Disponible" : "Pausado"}
+                    </span>
+                  </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <Link

@@ -9,14 +9,16 @@ export interface FindAllParams {
   month?: number;
   type?: 'NACIONAL' | 'INTERNACIONAL';
   title?: string;
+  available?: boolean;
 }
 
 function buildWhere(params: FindAllParams) {
-  const { month, type, title } = params;
+  const { month, type, title, available } = params;
   return {
     ...(month && { months: { has: month } }),
     ...(type && { type }),
     ...(title && { title: { contains: title, mode: "insensitive" as const } }),
+    ...(available !== undefined && { available }),
   };
 }
 
