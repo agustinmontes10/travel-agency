@@ -1,10 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Navbar } from "./Navbar";
 import { HeroContent } from "./HeroContent";
+
+const HERO_VIDEO_URL = "/Hero.mp4";
 
 const WHATSAPP_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE;
 const WHATSAPP_DEFAULT_MESSAGE =
@@ -47,21 +48,22 @@ export function Hero() {
           animate={{ scale: 1 }}
           transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <Image
-            src="/HeroCalidad.webp"
-            alt="Destinos icónicos alrededor del mundo"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[60%] md:object-bottom"
+          <video
+            src={HERO_VIDEO_URL}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover object-[60%] md:object-bottom"
           />
         </motion.div>
       </motion.div>
 
-      {/* Overlays: degradado vertical + scrim radial detrás del texto + fundido inferior al crema */}
+      {/* Overlays: degradado vertical + scrim radial detrás del texto */}
       <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/55 via-navy-deep/20 to-navy-deep/45" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_62%_52%_at_50%_52%,rgba(19,36,59,0.42),transparent_72%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent" />
+      {/* Fundido inferior: el video se disuelve hacia el fondo crema donde arranca la sección de números */}
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background via-background/70 to-transparent md:h-56 lg:h-72" />
 
       <motion.div
         className="relative z-10 w-full px-4 sm:px-8 lg:px-16 text-white"

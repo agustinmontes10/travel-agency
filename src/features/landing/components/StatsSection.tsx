@@ -61,7 +61,10 @@ function Counter({ value }: { value: number }) {
 
 export function StatsSection() {
   return (
-    <section aria-label="Nuestra trayectoria en números">
+    <section
+      aria-label="Nuestra trayectoria en números"
+      className="-mt-16 pt-24 pb-24 md:-mt-20 md:pt-28 md:pb-28 lg:-mt-24 lg:pt-32 lg:pb-32"
+    >
       <div className="grid gap-10 sm:grid-cols-3 sm:gap-6">
         {STATS.map((stat, i) => (
           <motion.div

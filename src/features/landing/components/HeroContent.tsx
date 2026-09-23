@@ -57,10 +57,7 @@ export function HeroContent({ whatsappUrl }: HeroContentProps) {
         />
       </motion.p>
 
-      <h1
-        className="font-display text-5xl leading-[1.06] tracking-tight text-balance sm:text-6xl lg:text-7xl"
-        style={{ textShadow: "0 2px 30px rgba(0,0,0,0.45)" }}
-      >
+      <h1 className="font-display text-5xl leading-[1.06] tracking-tight text-balance sm:text-6xl lg:text-7xl">
         <MaskedLine delay={0.3}>El mundo te espera,</MaskedLine>
         <MaskedLine delay={0.45}>
           <em className="italic text-sand">nosotros te llevamos.</em>

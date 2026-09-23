@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { PackagesSectionHeader } from "./PackagesSectionHeader";
-import { PackagesFilter } from "./PackagesFilter";
 import { PackagesResults } from "./PackagesResults";
 import { PackagesSkeleton } from "./PackagesSkeleton";
 import type { ListPackagesParams } from "@/features/packages/service";
@@ -29,10 +28,8 @@ export function PublicPackagesSection({ title, month, type }: PublicPackagesSect
   const suspenseKey = `${title ?? ""}-${month ?? ""}-${type ?? ""}`;
 
   return (
-    <section id="packages" className="space-y-8">
-      <PackagesSectionHeader />
-
-      <PackagesFilter title={title} month={month} type={type} />
+    <section id="packages" className="-mt-16 space-y-8 md:-mt-20 lg:-mt-24">
+      <PackagesSectionHeader title={title} month={month} type={type} />
 
       <Suspense key={suspenseKey} fallback={<PackagesSkeleton count={6} mobileCount={4} />}>
         <PackagesResults filters={filters} hasActiveFilters={hasActiveFilters} />

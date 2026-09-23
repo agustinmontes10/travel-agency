@@ -22,9 +22,9 @@ export default async function LandingPage({ searchParams }: LandingPageProps) {
   return (
     <main id="home" className="flex flex-1 flex-col gap-16 md:gap-20 lg:gap-24">
       <Hero />
+      <StatsSection />
       <PublicPackagesSection title={title} month={month} type={type} />
       <ServicesSection />
-      <StatsSection />
       <CtaVideosSection />
       <DestinationsMarquee />
       <ContactSection />

@@ -82,7 +82,7 @@ export function PackagesFilter({ title, month, type, basePath = "/" }: PackagesF
               type="text"
               defaultValue={title}
               placeholder="Ej: París, Caribe…"
-              className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground/60"
+              className="w-full bg-transparent text-foreground text-sm outline-none placeholder:text-muted-foreground/60"
             />
           </div>
         </div>

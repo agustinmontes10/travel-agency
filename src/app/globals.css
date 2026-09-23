@@ -50,7 +50,7 @@
   --color-muted-foreground: var(--muted-foreground);
 
   --font-sans: var(--font-hanken);
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-chau);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -63,6 +63,12 @@
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+/* Chau Philomene One está pensada para mayúsculas (!important porque el preflight
+   de Tailwind fuerza text-transform: none en button/input/select/textarea) */
+.font-display {
+  text-transform: uppercase !important;
 }
 
 ::selection {

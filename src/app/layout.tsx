@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Fraunces, Hanken_Grotesk } from "next/font/google";
+import { Chau_Philomene_One, Hanken_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { siteUrl, siteName, siteDescription } from "@/lib/site";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const chauPhilomeneOne = Chau_Philomene_One({
+  variable: "--font-chau",
   subsets: ["latin"],
+  weight: "400",
   style: ["normal", "italic"],
-  axes: ["opsz"],
 });
 
 const hankenGrotesk = Hanken_Grotesk({
@@ -45,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${fraunces.variable} ${hankenGrotesk.variable} antialiased`}>
+      <body className={`${chauPhilomeneOne.variable} ${hankenGrotesk.variable} antialiased`}>
         {children}
         <Analytics />
       </body>
