@@ -60,7 +60,7 @@ export function HeroContent({ whatsappUrl }: HeroContentProps) {
       <h1 className="font-display text-5xl leading-[1.06] tracking-tight text-balance sm:text-6xl lg:text-7xl">
         <MaskedLine delay={0.3}>El mundo te espera,</MaskedLine>
         <MaskedLine delay={0.45}>
-          <em className="italic text-frost">nosotros te llevamos.</em>
+          <em className="italic text-[#e6e6fa]">nosotros te llevamos.</em>
         </MaskedLine>
       </h1>
 
