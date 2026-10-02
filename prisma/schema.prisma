@@ -35,3 +35,33 @@ model Package {
   available Boolean     @default(true)
   createdAt DateTime    @default(now())
 }
+
+model Quote {
+  id                 String    @id @default(cuid())
+  clientName         String
+  destination        String    @default("")
+  passengers         Int       @default(1)
+  validUntil         DateTime? @db.Date
+  notes              String    @default("")
+
+  // Alternativas (validadas con Zod en features/quotes/schemas.ts)
+  flights            Json
+  hotels             Json
+  transfers          Json
+
+  assistanceType     String    @default("")
+  assistancePrice    Float     @default(0)
+
+  // Alternativa elegida de cada rubro (ids dentro de los JSON). Traslados es opcional.
+  selectedFlightId   String
+  selectedHotelId    String
+  selectedTransferId String?
+
+  // Snapshot de lo calculado al guardar (USD)
+  commissionPct      Float     @default(0)
+  netTotal           Float
+  total              Float
+
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
