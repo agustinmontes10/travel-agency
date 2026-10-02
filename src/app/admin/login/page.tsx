@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, Button, Input } from "@/components/ui";
 import { loginAction } from "./actions";
 
@@ -10,11 +11,12 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   const hasError = params?.error === "1";
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        <div className="mb-8 text-center">
+        <div className="mb-8 flex flex-col items-center text-center">
+          <Image src="/Logo.png" alt="MT Turismo" width={2880} height={713} priority className="mb-5 h-12 w-auto" />
           <h1 className="text-2xl font-semibold tracking-tight">Panel de administración</h1>
-          <p className="mt-1 text-sm text-muted-foreground">MT Turismo Gonzales Chaves</p>
+          <p className="mt-1 text-sm text-muted">MT Turismo Gonzales Chaves</p>
         </div>
 
         <Card>

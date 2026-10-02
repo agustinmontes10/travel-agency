@@ -1,7 +1,6 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
-import { logoutAction } from "./login/actions";
-import { Button } from "@/components/ui";
-import { AdminNav } from "./AdminNav";
+import { AdminHeader } from "./AdminHeader";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -9,27 +8,16 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border-subtle bg-surface px-6 py-4">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
-          <div className="flex items-center gap-6">
-            <div>
-              <span className="text-sm font-semibold">MT Turismo</span>
-              <span className="ml-2 hidden text-xs text-muted-foreground sm:inline">Panel de administración</span>
-            </div>
-            <AdminNav />
-          </div>
-          <form action={logoutAction}>
-            <Button type="submit" variant="ghost" size="sm">
-              Cerrar sesión
-            </Button>
-          </form>
-        </div>
-      </header>
+    <div className="relative isolate min-h-screen">
+      {/* Foto de fondo fija, con un velo ghostwhite encima para que el contenido se lea bien. */}
+      <div aria-hidden className="fixed inset-0 -z-10">
+        <Image src="/fondoAdmin.jpg" alt="" fill priority sizes="100vw" className="object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/85 to-background/92" />
+      </div>
 
-      <main className="mx-auto max-w-6xl px-6 py-10">
-        {children}
-      </main>
+      <AdminHeader />
+
+      <main className="mx-auto max-w-6xl px-6 py-10">{children}</main>
     </div>
   );
 }
