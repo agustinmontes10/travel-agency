@@ -76,11 +76,12 @@ export function ContactSection() {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
         <Reveal className="gap-8 md:flex md:items-start md:justify-between" y={28} amount={0.15}>
           <div className="max-w-xl space-y-4">
+            {/* Sobre el fondo navy el logo azul no tiene contraste: va la versión blanca. */}
             <Image
               src="/LogoBlanco.png"
               alt="mt turismo Gonzales Chaves"
-              width={180}
-              height={48}
+              width={2908}
+              height={713}
               className="h-10 w-auto sm:h-12"
             />
             <p className="font-display text-2xl italic leading-snug text-white sm:text-3xl">
@@ -97,7 +98,7 @@ export function ContactSection() {
               href={whatsappUrl}
               target="_blank"
               onClick={() => track("whatsapp_click", { source: "footer" })}
-              className="inline-flex h-12 items-center justify-center rounded-full bg-gold px-8 text-sm font-semibold tracking-tight text-navy-deep shadow-lg shadow-black/30 transition-all duration-200 hover:-translate-y-0.5 hover:bg-sand"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-[#25D366] px-8 text-sm font-semibold tracking-tight text-white shadow-lg shadow-black/30 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#1ebe5d]"
             >
               Escribir por WhatsApp
             </Link>
@@ -133,7 +134,7 @@ export function ContactSection() {
                   href={href}
                   target={external ? "_blank" : undefined}
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 transition-all duration-200 hover:border-gold/70 hover:text-sand hover:-translate-y-0.5"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 transition-all duration-200 hover:border-frost/70 hover:text-frost hover:-translate-y-0.5"
                 >
                   {icon}
                 </Link>
@@ -149,7 +150,7 @@ export function ContactSection() {
           <a
             href="https://neexia.com.ar"
             target="_blank"
-            className="inline-flex items-center gap-2 transition-colors hover:text-sand"
+            className="inline-flex items-center gap-2 transition-colors hover:text-frost"
           >
             Hecho por Neexia
             {/* <svg width="24" height="24" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">

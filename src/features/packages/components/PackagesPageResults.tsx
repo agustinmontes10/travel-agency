@@ -78,7 +78,7 @@ export async function PackagesPageResults({
               className={cn(
                 "inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors",
                 hasPrev
-                  ? "border-border-subtle bg-surface text-foreground hover:bg-surface-muted hover:border-accent/30"
+                  ? "border-border-subtle bg-surface text-foreground hover:bg-accent-soft hover:border-accent/30"
                   : "pointer-events-none border-border-subtle bg-surface opacity-30 text-foreground"
               )}
             >
@@ -101,7 +101,7 @@ export async function PackagesPageResults({
                     "inline-flex h-9 w-9 items-center justify-center rounded-full border text-sm font-medium transition-colors",
                     item === page
                       ? "border-accent bg-accent text-accent-foreground shadow-sm"
-                      : "border-border-subtle bg-surface text-foreground hover:bg-surface-muted hover:border-accent/30"
+                      : "border-border-subtle bg-surface text-foreground hover:bg-accent-soft hover:border-accent/30"
                   )}
                 >
                   {item}
@@ -117,7 +117,7 @@ export async function PackagesPageResults({
               className={cn(
                 "inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors",
                 hasNext
-                  ? "border-border-subtle bg-surface text-foreground hover:bg-surface-muted hover:border-accent/30"
+                  ? "border-border-subtle bg-surface text-foreground hover:bg-accent-soft hover:border-accent/30"
                   : "pointer-events-none border-border-subtle bg-surface opacity-30 text-foreground"
               )}
             >

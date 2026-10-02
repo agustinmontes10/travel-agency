@@ -48,12 +48,13 @@ export function Navbar({ whatsappUrl }: NavbarProps) {
     <>
       {/* Navbar transparente sobre el hero */}
       <header className="mx-auto flex max-w-6xl w-full items-center justify-between pt-6 text-sm absolute z-10 top-0 inset-x-0 px-4 sm:px-6">
+        {/* Sobre el video el logo azul no tiene contraste: va la versión blanca. */}
         <button onClick={() => scrollToSection("#home")} className="inline-flex items-center">
           <Image
             src="/LogoBlanco.png"
             alt="mt turismo Gonzales Chaves"
-            width={180}
-            height={48}
+            width={2908}
+            height={713}
             priority
             className="h-10 w-auto sm:h-12"
           />
@@ -73,7 +74,7 @@ export function Navbar({ whatsappUrl }: NavbarProps) {
             ))}
           </nav>
           <Link href={whatsappUrl} target={'_blank'} aria-label="Agendar por WhatsApp" onClick={() => track("whatsapp_click", { source: "navbar_hero" })}>
-            <span className="inline-flex h-[3.25rem] items-center rounded-full bg-background px-6 text-sm font-semibold tracking-tight text-navy-deep shadow-lg shadow-black/15 transition-all duration-200 hover:bg-sand hover:-translate-y-px cursor-pointer">
+            <span className="inline-flex h-[3.25rem] items-center rounded-full bg-background px-6 text-sm font-semibold tracking-tight text-navy-deep shadow-lg shadow-black/15 transition-all duration-200 hover:bg-mist hover:-translate-y-px cursor-pointer">
               Consultar ahora
             </span>
           </Link>
@@ -104,10 +105,10 @@ export function Navbar({ whatsappUrl }: NavbarProps) {
             <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
               <button onClick={() => scrollToSection("#home")} className="inline-flex items-center">
                 <Image
-                  src="/LogoOscuro.png"
+                  src="/Logo.png"
                   alt="mt turismo Gonzales Chaves"
-                  width={150}
-                  height={40}
+                  width={2880}
+                  height={713}
                   className="h-8 w-auto sm:h-9"
                 />
               </button>
@@ -164,7 +165,7 @@ export function Navbar({ whatsappUrl }: NavbarProps) {
           <button
             key={href}
             onClick={() => { scrollToSection(href); setOpen(false); }}
-            className={`font-display text-2xl italic text-foreground border-b border-border-subtle pb-4 transition-all duration-500 hover:text-gold hover:border-gold/40 ${
+            className={`font-display text-2xl italic text-foreground border-b border-border-subtle pb-4 transition-all duration-500 hover:text-accent hover:border-accent/40 ${
               open ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
             }`}
             style={{ transitionDelay: open ? `${160 + i * 70}ms` : "0ms" }}
