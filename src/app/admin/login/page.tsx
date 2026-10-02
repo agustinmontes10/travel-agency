@@ -10,7 +10,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   const hasError = params?.error === "1";
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-surface-muted px-4">
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">Panel de administración</h1>

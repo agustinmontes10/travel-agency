@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf7f1;
+  --background: ghostwhite;
   --foreground: #1b2c44;
 
   --surface: #ffffff;
@@ -18,6 +18,10 @@
   --sand: #ecd3ab;
 
   --navy-deep: #13243b;
+
+  /* Azules claros derivados del accent, para hovers y textos sobre fondos oscuros */
+  --mist: #dbe4f1;
+  --frost: #a9c6ef;
 
   --muted: #5c6b80;
   --muted-foreground: #8b98a9;
@@ -45,6 +49,8 @@
   --color-gold-soft: var(--gold-soft);
   --color-sand: var(--sand);
   --color-navy-deep: var(--navy-deep);
+  --color-mist: var(--mist);
+  --color-frost: var(--frost);
 
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
@@ -72,7 +78,7 @@
 }
 
 ::selection {
-  background: rgba(179, 135, 74, 0.3);
+  background: rgba(37, 67, 107, 0.28);
   color: var(--foreground);
 }
 
@@ -142,4 +148,16 @@ html.lenis body {
 
 .lenis.lenis-stopped {
   overflow: hidden;
+}
+
+/* Cotizador: entrada suave de alternativas / tramos agregados */
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+.animate-pop-in {
+  animation: pop-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-pop-in { animation: none; }
 }
