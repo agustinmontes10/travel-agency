@@ -58,7 +58,7 @@ export default async function PaquetesPage({ searchParams }: PaquetesPageProps) 
       {/* Back button */}
       <Link
         href="/#packages"
-        className="inline-flex w-fit items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-gold"
+        className="inline-flex w-fit items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-accent"
       >
         <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="15 18 9 12 15 6" />

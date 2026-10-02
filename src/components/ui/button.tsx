@@ -14,7 +14,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary:
     "bg-accent text-accent-foreground shadow-soft hover:bg-navy-deep hover:-translate-y-px focus-visible:ring-accent",
   secondary:
-    "bg-surface text-foreground border border-border-subtle hover:border-gold/50 hover:bg-surface-muted focus-visible:ring-accent",
+    "bg-surface text-foreground border border-border-subtle hover:border-accent/30 hover:bg-accent-soft focus-visible:ring-accent",
   ghost:
     "bg-transparent text-foreground hover:bg-accent-soft focus-visible:ring-accent",
 };

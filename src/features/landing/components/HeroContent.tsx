@@ -60,7 +60,7 @@ export function HeroContent({ whatsappUrl }: HeroContentProps) {
       <h1 className="font-display text-5xl leading-[1.06] tracking-tight text-balance sm:text-6xl lg:text-7xl">
         <MaskedLine delay={0.3}>El mundo te espera,</MaskedLine>
         <MaskedLine delay={0.45}>
-          <em className="italic text-sand">nosotros te llevamos.</em>
+          <em className="italic text-[#e6e6fa]">nosotros te llevamos.</em>
         </MaskedLine>
       </h1>
 
@@ -83,7 +83,7 @@ export function HeroContent({ whatsappUrl }: HeroContentProps) {
       >
         <Link
           href="#packages"
-          className="inline-flex h-12 items-center justify-center rounded-full bg-background px-8 text-sm font-semibold tracking-tight text-navy-deep shadow-lg shadow-black/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-sand active:scale-[0.98]"
+          className="inline-flex h-12 items-center justify-center rounded-full bg-background px-8 text-sm font-semibold tracking-tight text-navy-deep shadow-lg shadow-black/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-mist active:scale-[0.98]"
         >
           Ver paquetes disponibles
         </Link>

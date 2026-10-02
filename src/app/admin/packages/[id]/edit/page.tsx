@@ -159,7 +159,7 @@ export default async function EditPackagePage({ params }: EditPackagePageProps) 
               </Button>
               <Link
                 href="/admin/packages"
-                className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-border-subtle bg-surface px-4 text-sm font-medium tracking-tight transition-colors hover:bg-surface-muted"
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-border-subtle bg-surface px-4 text-sm font-medium tracking-tight transition-colors hover:bg-accent-soft"
               >
                 Cancelar
               </Link>

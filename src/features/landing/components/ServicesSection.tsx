@@ -88,7 +88,7 @@ export function ServicesSection() {
             {/* Regla superior que se dibuja al entrar y se ilumina al hover */}
             <span className="absolute top-0 left-0 right-0">
               <DrawnRule
-                className="w-full bg-foreground/15 transition-colors duration-300 group-hover:bg-gold/60"
+                className="w-full bg-foreground/15 transition-colors duration-300 group-hover:bg-accent/50"
                 delay={0.2 + i * 0.15}
               />
             </span>
@@ -96,7 +96,7 @@ export function ServicesSection() {
               <span className="font-display text-lg italic text-gold">
                 0{i + 1}
               </span>
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent-soft transition-all duration-300 group-hover:bg-gold-soft group-hover:scale-110">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent-soft transition-all duration-300 group-hover:bg-accent/15 group-hover:scale-110">
                 {service.icon}
               </span>
             </div>
