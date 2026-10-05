@@ -61,3 +61,10 @@ export function nightsBetween(checkIn: string, checkOut: string): number {
 
 export const formatUSD = (n: number) =>
   `US$ ${new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n)}`;
+
+/** Redondea al múltiplo de 5 más cercano (1771,12 → 1770; 1773,8 → 1775). */
+export const roundToFive = (n: number) => Math.round(n / 5) * 5;
+
+/** Monto entero, sin centavos (para precios ya redondeados). */
+export const formatUSDWhole = (n: number) =>
+  `US$ ${new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 }).format(n)}`;
