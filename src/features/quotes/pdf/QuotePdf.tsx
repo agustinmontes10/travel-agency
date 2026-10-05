@@ -1,6 +1,6 @@
 import { Document, Image, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import type { ReactNode } from "react";
-import { formatUSD, nightsBetween, round2 } from "../calculations";
+import { formatUSDWhole, nightsBetween, roundToFive } from "../calculations";
 import type { QuoteRecord } from "../service";
 import { PageDecorations, RouteArrow } from "./decorations";
 import { SolidIcon, type SolidIconName } from "./icons";
@@ -129,7 +129,8 @@ export function QuotePdf({ quote, logo }: QuotePdfProps) {
   const hotel = quote.hotels.find((h) => h.id === quote.selectedHotelId);
   const transfer = quote.transfers.find((t) => t.id === quote.selectedTransferId);
   const hasAssistance = quote.assistancePrice > 0;
-  const perPerson = round2(quote.total / Math.max(1, quote.passengers));
+  // El precio al cliente va redondeado a 0 o 5 (múltiplo de 5), sin centavos.
+  const perPerson = roundToFive(quote.total / Math.max(1, quote.passengers));
 
   const phone = process.env.NEXT_PUBLIC_WHATSAPP_PHONE;
   const issued = shortDateFormat.format(quote.createdAt);
@@ -222,7 +223,7 @@ export function QuotePdf({ quote, logo }: QuotePdfProps) {
 
           <View style={styles.totalBox} wrap={false}>
             <Text style={styles.totalLabel}>PRECIO TOTAL POR PASAJERO</Text>
-            <Text style={styles.totalValue}>{formatUSD(perPerson)}</Text>
+            <Text style={styles.totalValue}>{formatUSDWhole(perPerson)}</Text>
           </View>
 
           {/* Es larga para la fila de chips del encabezado (choca con la decoración): va centrada bajo el precio. */}
