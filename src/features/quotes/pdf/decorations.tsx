@@ -2,7 +2,7 @@ import { Circle, G, Path, Svg, View } from "@react-pdf/renderer";
 import { PLANE_PATH } from "./icons";
 
 /**
- * Decoración del PDF en SVG (react-pdf): trayectos punteados, aviones y brújula.
+ * Decoración del PDF en SVG (react-pdf): manchas de color, estrellitas, brújula y flechas de ruta.
  * Todo en tonos de la paleta azul de la marca; la variación sale de la opacidad, no de colores nuevos.
  */
 export const DECO = {
@@ -107,12 +107,6 @@ function Sparkle({
   );
 }
 
-const dashed = {
-  fill: "none",
-  strokeDasharray: "4 4",
-  strokeLinecap: "round" as const,
-};
-
 /** Fondo de la página (se dibuja antes que el contenido). Coordenadas en pt sobre una A4 (595×842). */
 export function PageDecorations() {
   const { accent } = DECO;
@@ -140,27 +134,8 @@ export function PageDecorations() {
           fillOpacity={0.07}
         />
 
-        {/* Trayecto punteado del hero, con avión grande */}
-        <Path
-          d="M318 176C372 200 424 160 402 128 386 104 352 124 378 150 410 182 462 160 494 126"
-          stroke={accent}
-          strokeOpacity={0.55}
-          strokeWidth={1.3}
-          {...dashed}
-        />
-        <Plane cx={512} cy={108} size={62} rotate={42} color={accent} />
-        <Sparkle x={344} y={104} color={accent} opacity={0.45} />
         <Sparkle x={560} y={196} size={3} color={accent} opacity={0.4} />
 
-        {/* Trayecto lateral en el margen izquierdo */}
-        <Path
-          d="M18 300C2 340 36 360 18 402 4 436 30 472 14 524"
-          stroke={accent}
-          strokeOpacity={0.4}
-          strokeWidth={1.2}
-          {...dashed}
-        />
-        <Sparkle x={26} y={282} size={3} color={accent} opacity={0.4} />
         <Sparkle x={572} y={470} size={3.5} color={accent} opacity={0.4} />
 
         {/* Brújula abajo a la derecha */}
